@@ -1,10 +1,8 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
@@ -15,27 +13,17 @@
 
     <title>Na Rua | Agenda de Manifestações</title>
 
-
     <!-- ================================= -->
     <!-- ESTILOS DO SITE                   -->
     <!-- ================================= -->
 
     <link rel="stylesheet" href="css/style.css">
-
     <link rel="stylesheet" href="css/responsivo.css">
 
-
-    <!-- ================================= -->
-    <!-- BIBLIOTECA LEAFLET - CSS          -->
-    <!-- ================================= -->
-
-    <link
-        rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    >
-
+    <!-- Biblioteca Leaflet -->
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
-
 
 <body>
 
@@ -44,73 +32,47 @@
     <!-- ================================= -->
 
     <header class="cabecalho">
-
         <div class="container cabecalho-conteudo">
 
-            <!-- LOGOTIPO -->
-
             <a href="#inicio" class="logo">
-
                 <span class="logo-icone"
-                      aria-hidden="true">
-                    ✊
-                </span>
+                      aria-hidden="true">✊</span>
 
                 <span class="logo-texto">
                     Na Rua
                 </span>
-
             </a>
-
 
             <!-- MENU PRINCIPAL -->
 
             <nav class="menu" aria-label="Menu principal">
-
-                <a href="#inicio">
-                    Início
-                </a>
+                <a href="#inicio">Início</a>
 
                 <a href="#manifestacoes">
                     Manifestações
                 </a>
 
-                <a href="#mapa-section">
-                    Mapa
-                </a>
+                <a href="#mapa-section">Mapa</a>
 
-                <a href="#sobre">
-                    Sobre
-                </a>
-
+                <a href="#sobre">Sobre</a>
             </nav>
 
+            <!-- CADASTRO -->
 
-            <!-- BOTÃO DE CADASTRO -->
-
-            <a
-                href="cadastrar.html"
-                class="botao botao-destaque"
-            >
+            <a href="cadastrar.html"
+               class="botao botao-destaque">
                 Divulgar manifestação
             </a>
 
         </div>
-
     </header>
 
 
-
-    <!-- ================================= -->
-    <!-- CONTEÚDO PRINCIPAL                -->
-    <!-- ================================= -->
-
     <main>
 
-
-        <!-- ============================= -->
-        <!-- SEÇÃO INICIAL / HERO          -->
-        <!-- ============================= -->
+        <!-- ================================= -->
+        <!-- SEÇÃO INICIAL / HERO              -->
+        <!-- ================================= -->
 
         <section id="inicio" class="hero">
 
@@ -122,29 +84,22 @@
                         Agenda nacional de manifestações
                     </span>
 
-
                     <h1>
                         Saiba o que acontece
-                        <span>
-                            nas ruas do Brasil.
-                        </span>
+                        <span>nas ruas do Brasil.</span>
                     </h1>
-
 
                     <p>
                         Encontre manifestações, atos públicos
                         e mobilizações em sua cidade.
 
                         Consulte datas, horários, locais
-                        de concentração e outras informações
-                        importantes.
+                        de concentração e outras
+                        informações importantes.
                     </p>
 
-
-                    <a
-                        href="#manifestacoes"
-                        class="botao botao-primario"
-                    >
+                    <a href="#manifestacoes"
+                       class="botao botao-primario">
                         Explorar manifestações
                     </a>
 
@@ -155,10 +110,9 @@
         </section>
 
 
-
-        <!-- ============================= -->
-        <!-- BUSCA E FILTROS               -->
-        <!-- ============================= -->
+        <!-- ================================= -->
+        <!-- BUSCA E FILTROS                   -->
+        <!-- ================================= -->
 
         <section class="secao-filtros">
 
@@ -175,14 +129,8 @@
                         estado ou nome do evento.
                     </p>
 
-
-                    <!-- FORMULÁRIO DOS FILTROS -->
-
-                    <form
-                        id="form-filtros"
-                        class="form-filtros"
-                    >
-
+                    <form id="form-filtros"
+                          class="form-filtros">
 
                         <!-- PESQUISA -->
 
@@ -202,7 +150,6 @@
                         </div>
 
 
-
                         <!-- ESTADO -->
 
                         <div class="campo-filtro">
@@ -211,19 +158,13 @@
                                 Estado
                             </label>
 
-                            <select
-                                id="estado"
-                                name="estado"
-                            >
-
+                            <select id="estado" name="estado">
                                 <option value="">
                                     Todos os estados
                                 </option>
-
                             </select>
 
                         </div>
-
 
 
                         <!-- CIDADE -->
@@ -234,19 +175,13 @@
                                 Cidade
                             </label>
 
-                            <select
-                                id="cidade"
-                                name="cidade"
-                            >
-
+                            <select id="cidade" name="cidade">
                                 <option value="">
                                     Todas as cidades
                                 </option>
-
                             </select>
 
                         </div>
-
 
 
                         <!-- DATA -->
@@ -266,7 +201,6 @@
                         </div>
 
 
-
                         <!-- BOTÃO BUSCAR -->
 
                         <button
@@ -275,7 +209,6 @@
                         >
                             Buscar
                         </button>
-
 
 
                         <!-- BOTÃO LIMPAR -->
@@ -287,7 +220,6 @@
                             Limpar
                         </button>
 
-
                     </form>
 
                 </div>
@@ -297,10 +229,9 @@
         </section>
 
 
-
-        <!-- ============================= -->
-        <!-- AGENDA DE MANIFESTAÇÕES       -->
-        <!-- ============================= -->
+        <!-- ================================= -->
+        <!-- AGENDA DE MANIFESTAÇÕES           -->
+        <!-- ================================= -->
 
         <section
             id="manifestacoes"
@@ -308,7 +239,6 @@
         >
 
             <div class="container">
-
 
                 <!-- CABEÇALHO DA AGENDA -->
 
@@ -325,14 +255,14 @@
                         </h2>
 
                         <p>
-                            Confira manifestações, atos públicos,
-                            assembleias e atividades estudantis
-                            divulgados em diferentes cidades
-                            do Brasil.
+                            Confira manifestações,
+                            atos públicos, assembleias
+                            e atividades estudantis
+                            divulgados em diferentes
+                            cidades do Brasil.
                         </p>
 
                     </div>
-
 
 
                     <!-- ORDENAÇÃO -->
@@ -360,19 +290,20 @@
                 </div>
 
 
-
-                <!-- ========================= -->
-                <!-- LISTA DE MANIFESTAÇÕES    -->
-                <!-- ========================= -->
+                <!-- ================================= -->
+                <!-- MANIFESTAÇÕES DO SUPABASE         -->
+                <!-- ================================= -->
 
                 <!--
                     Os cartões são criados
                     automaticamente pelo main.js.
 
-                    Os dados são carregados
-                    atualmente do arquivo:
+                    Os dados são consultados
+                    na tabela manifestacoes
+                    do Supabase.
 
-                    data/manifestacoes.json
+                    Somente os registros com
+                    publicado = true são exibidos.
                 -->
 
                 <div
@@ -388,7 +319,6 @@
                 </div>
 
 
-
                 <!-- MENSAGEM SEM RESULTADOS -->
 
                 <p
@@ -400,16 +330,14 @@
                     para os filtros selecionados.
                 </p>
 
-
             </div>
 
         </section>
 
 
-
-        <!-- ============================= -->
-        <!-- MAPA DE MANIFESTAÇÕES         -->
-        <!-- ============================= -->
+        <!-- ================================= -->
+        <!-- MAPA DE MANIFESTAÇÕES             -->
+        <!-- ================================= -->
 
         <section
             id="mapa-section"
@@ -417,7 +345,6 @@
         >
 
             <div class="container">
-
 
                 <div class="secao-cabecalho">
 
@@ -436,15 +363,16 @@
                             os locais das manifestações
                             cadastradas.
 
-                            Os marcadores representam pontos
-                            de referência. Confira os detalhes
+                            Os marcadores representam
+                            pontos de referência.
+
+                            Confira os detalhes
                             com os organizadores.
                         </p>
 
                     </div>
 
                 </div>
-
 
 
                 <!-- MAPA LEAFLET -->
@@ -457,23 +385,20 @@
                 >
                 </div>
 
-
                 <!--
-                    O mapa.js adicionará abaixo do mapa
-                    um resumo dos eventos com localização
+                    O mapa.js adicionará um resumo
+                    dos eventos com localização
                     conhecida ou ainda pendente.
                 -->
-
 
             </div>
 
         </section>
 
 
-
-        <!-- ============================= -->
-        <!-- DIVULGAR MANIFESTAÇÃO         -->
-        <!-- ============================= -->
+        <!-- ================================= -->
+        <!-- DIVULGAR MANIFESTAÇÃO             -->
+        <!-- ================================= -->
 
         <section
             id="divulgar"
@@ -485,25 +410,21 @@
                 <div class="divulgar-conteudo">
 
                     <h2>
-                        Conhece uma manifestação que
-                        ainda não está na agenda?
+                        Conhece uma manifestação
+                        que ainda não está na agenda?
                     </h2>
-
 
                     <p>
                         Ajude a manter as informações
                         atualizadas.
 
                         Envie os dados da manifestação,
-                        local, horário, organização responsável
-                        e fontes de divulgação.
+                        local, horário, organização
+                        responsável e fontes de divulgação.
 
                         Todas as solicitações serão
                         analisadas antes da publicação.
                     </p>
-
-
-                    <!-- PÁGINA DE CADASTRO -->
 
                     <a
                         href="cadastrar.html"
@@ -519,10 +440,9 @@
         </section>
 
 
-
-        <!-- ============================= -->
-        <!-- SOBRE O PROJETO               -->
-        <!-- ============================= -->
+        <!-- ================================= -->
+        <!-- SOBRE O PROJETO                   -->
+        <!-- ================================= -->
 
         <section
             id="sobre"
@@ -535,36 +455,36 @@
                     Sobre o projeto
                 </h2>
 
-
                 <p>
-                    O Na Rua é uma plataforma independente
-                    dedicada à divulgação de informações
-                    públicas sobre manifestações,
-                    mobilizações, assembleias e atos
-                    realizados em todo o Brasil.
+                    O Na Rua é uma plataforma
+                    independente dedicada à divulgação
+                    de informações públicas sobre
+                    manifestações, mobilizações,
+                    assembleias e atos realizados
+                    em todo o Brasil.
                 </p>
 
-
                 <p>
-                    Nosso objetivo é facilitar o acesso
-                    às informações de local, data e horário,
+                    Nosso objetivo é facilitar
+                    o acesso às informações de
+                    local, data e horário,
                     contribuindo para a transparência
                     e o acesso à informação.
                 </p>
 
-
                 <p>
-                    As manifestações divulgadas na plataforma
-                    são cadastradas a partir de fontes
-                    públicas ou informações encaminhadas
+                    As manifestações divulgadas
+                    na plataforma são cadastradas
+                    a partir de fontes públicas
+                    ou informações encaminhadas
                     para análise administrativa.
                 </p>
 
-
                 <p>
-                    O cadastro de novos eventos estará
-                    disponível após a conclusão do
-                    sistema de segurança e aprovação.
+                    O cadastro de novos eventos
+                    estará disponível após
+                    a conclusão do sistema
+                    de segurança e aprovação.
                 </p>
 
 
@@ -574,12 +494,12 @@
 
                     <strong>Atenção:</strong>
 
-                    Datas, horários, locais e trajetos
-                    podem sofrer alterações.
+                    Datas, horários, locais e
+                    trajetos podem sofrer alterações.
 
-                    Consulte sempre as fontes originais
-                    e as informações divulgadas
-                    pelos organizadores.
+                    Consulte sempre as fontes
+                    originais e as informações
+                    divulgadas pelos organizadores.
 
                 </p>
 
@@ -587,9 +507,7 @@
 
         </section>
 
-
     </main>
-
 
 
     <!-- ================================= -->
@@ -599,9 +517,6 @@
     <footer class="rodape">
 
         <div class="container rodape-conteudo">
-
-
-            <!-- INFORMAÇÕES -->
 
             <div class="rodape-info">
 
@@ -617,14 +532,9 @@
             </div>
 
 
-
-            <!-- LINKS -->
-
             <div class="rodape-links">
 
-                <a href="#inicio">
-                    Início
-                </a>
+                <a href="#inicio">Início</a>
 
                 <a href="#manifestacoes">
                     Agenda
@@ -643,9 +553,6 @@
         </div>
 
 
-
-        <!-- DIREITOS -->
-
         <div class="rodape-final">
 
             <p>
@@ -659,9 +566,8 @@
     </footer>
 
 
-
     <!-- ================================= -->
-    <!-- BIBLIOTECA LEAFLET - JAVASCRIPT   -->
+    <!-- 1. BIBLIOTECA LEAFLET              -->
     <!-- ================================= -->
 
     <script
@@ -669,17 +575,9 @@
     </script>
 
 
-
     <!-- ================================= -->
-    <!-- BIBLIOTECA SUPABASE               -->
+    <!-- 2. BIBLIOTECA SUPABASE             -->
     <!-- ================================= -->
-
-    <!--
-        Cliente Supabase para navegador.
-
-        Este script precisa ser carregado
-        antes do arquivo js/supabase.js.
-    -->
 
     <script
         src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
@@ -687,17 +585,11 @@
     </script>
 
 
-
     <!-- ================================= -->
-    <!-- CONEXÃO COM SUPABASE              -->
+    <!-- 3. CONEXÃO COM SUPABASE            -->
     <!-- ================================= -->
 
-    <!--
-        Contém a URL e a Publishable Key
-        do projeto Supabase.
-
-        Nunca utilizar Secret Key aqui.
-    -->
+    <!-- Somente URL e chave pública. -->
 
     <script
         src="js/supabase.js"
@@ -705,12 +597,9 @@
     </script>
 
 
-
     <!-- ================================= -->
-    <!-- SCRIPTS DO PROJETO                -->
+    <!-- 4. MAPA INTERATIVO                 -->
     <!-- ================================= -->
-
-    <!-- MAPA INTERATIVO -->
 
     <script
         src="js/mapa.js"
@@ -718,7 +607,9 @@
     </script>
 
 
-    <!-- FILTROS DE PESQUISA -->
+    <!-- ================================= -->
+    <!-- 5. FILTROS DE PESQUISA             -->
+    <!-- ================================= -->
 
     <script
         src="js/filtros.js"
@@ -726,14 +617,14 @@
     </script>
 
 
-    <!-- CARREGAMENTO DAS MANIFESTAÇÕES -->
+    <!-- ================================= -->
+    <!-- 6. MANIFESTAÇÕES DO SUPABASE       -->
+    <!-- ================================= -->
 
     <script
         src="js/main.js"
         defer>
     </script>
 
-
 </body>
-
 </html>
