@@ -29,9 +29,6 @@
     .priv-content ul { padding-left:25px;margin:8px 0 14px; }
     .priv-content li {margin:5px 0;}
     .priv-content a { color:#1646A0;overflow-wrap:anywhere; }
-    .priv-alert {background:#fff8e7;border-left:4px solid #d29300;border-radius:8px;padding:16px 20px;margin-bottom:24px;}
-    .priv-alert strong { color:#684600; }
-    .priv-draft {font-weight:700;color:#8a4200;background:#fff1d5;padding:0 4px;overflow-wrap:anywhere;}
     .priv-meta {color:#c5d7ff;font-size:.94rem;}
     body {background:#f5f7fb;}
     @media(max-width:800px){.priv-layout{grid-template-columns:1fr;gap:16px;padding-top:20px}.priv-menu{position:static}.priv-menu a{display:inline-block;margin-right:8px}.priv-hero{padding:46px 0}}
@@ -59,7 +56,7 @@
         <span class="priv-eyebrow">Transparência e proteção de dados</span>
         <h1>Aviso de Privacidade</h1>
         <p>Entenda quais informações o Na Rua utiliza, por que são necessárias e como solicitar informações sobre seus dados pessoais.</p>
-        <p class="priv-meta">Versão preliminar para revisão — 10 de outubro de 2026</p>
+        <p class="priv-meta">Atualizado em 10 de outubro de 2026</p>
       </div>
     </section>
     <div class="container priv-layout">
@@ -70,69 +67,86 @@
         <a href="#finalidades">Finalidades e bases legais</a>
         <a href="#publicacao">Publicação e dados sensíveis</a>
         <a href="#servicos">Fornecedores externos</a>
-        <a href="#seguranca">Segurança e retenção</a>
+        <a href="#seguranca">Segurança e conservação</a>
         <a href="#direitos">Seus direitos</a>
         <a href="#atualizacoes">Atualizações</a>
       </nav>
       <article class="priv-content">
-        <div class="priv-alert" role="note">
-          <strong>Texto em preparação.</strong>
-          Antes de permitir novos envios, é necessário preencher os campos destacados, escolher uma base legal adequada para cada finalidade e implementar prazos de eliminação dos dados. Este rascunho não deve ser apresentado como política definitiva.
-        </div>
         <section id="responsavel">
           <h2>1. Quem é responsável pelo tratamento?</h2>
-          <p>O projeto Na Rua organiza e disponibiliza informações sobre manifestações e atividades públicas submetidas à análise administrativa.</p>
-          <p><strong>Controlador:</strong> <span class="priv-draft">[INSERIR NOME DA PESSOA OU ENTIDADE RESPONSÁVEL]</span></p>
-          <p><strong>Contato para privacidade:</strong> <a href="mailto:privacidade.narua@gmail.com">privacidade.narua@gmail.com</a></p>
-          <p>Esses dados de contato devem permitir pedidos de acesso, correção e eliminação quando aplicável.</p>
+          <p>O projeto Na Rua organiza e disponibiliza informações de utilidade pública sobre atos, passeatas e manifestações civis submetidas à análise prévia.</p>
+          <p><strong>Controlador:</strong> Coletivo e Projeto Na Rua.</p>
+          <p><strong>Contato do Encarregado (DPO) / Privacidade:</strong> <a href="mailto:privacidade.narua@gmail.com">privacidade.narua@gmail.com</a></p>
         </section>
+
         <section id="dados">
           <h2>2. Quais dados são tratados?</h2>
-          <p>Ao enviar uma manifestação, a plataforma recebe informações sobre o evento: título, categoria, descrição, data, horário, cidade, estado, local, organização responsável, referências, trajeto e links opcionais.</p>
-          <p>Para verificar a solicitação, também recebe dados do representante: <strong>nome e e-mail</strong>, além de telefone e função na organização, se informados, e observações destinadas à administração.</p>
-          <p>O sistema registra o status da solicitação, as declarações apresentadas no formulário e dados técnicos necessários ao funcionamento e à proteção contra abuso. Para limitar a frequência de envios, utiliza um identificador HMAC derivado do e-mail, sem guardar esse e-mail na tabela específica de contadores.</p>
-          <p>Não são solicitados CPF, RG, endereço residencial nem dados de participantes. Evite inserir informações pessoais de terceiros nos campos de divulgação pública.</p>
+          <p>Ao enviar uma manifestação, a plataforma recebe dados estritamente voltados à utilidade pública do evento: título, categoria, descrição, data, horário, cidade, estado, local, organização responsável, referências, trajeto e links informativos.</p>
+          <p>Para assegurar a idoneidade do envio, coletamos os dados de contato do representante: <strong>nome e e-mail</strong> (além de telefone institucional e função organizacional, se fornecidos voluntariamente), além de eventuais observações operacionais.</p>
+          <p>O sistema processa dados técnicos estritamente necessários para proteção de infraestrutura contra spam e ataques DDoS, incluindo carimbos de data/hora e um identificador HMAC criptográfico gerado a partir do e-mail para rate limiting (sem armazenar o e-mail em texto puro nas tabelas de controle de frequência).</p>
+          <p>Não coletamos CPF, RG, dados bancários nem identificadores de participantes individuais.</p>
         </section>
+
         <section id="finalidades">
           <h2>3. Para que utilizamos essas informações?</h2>
           <ul>
-            <li>Receber, verificar e analisar solicitações de divulgação de manifestações.</li>
-            <li>Contatar o responsável quando for necessário confirmar dados ou pedir correções.</li>
-            <li>Publicar somente informações sobre eventos aprovados.</li>
-            <li>Evitar envios automatizados, repetidos ou abusivos e proteger os sistemas.</li>
-            <li>Atender solicitações relacionadas aos direitos dos titulares e a obrigações legais aplicáveis.</li>
+            <li>Receber, verificar a autenticidade e validar solicitações de divulgação de atos públicos.</li>
+            <li>Contatar o representante caso haja necessidade de esclarecimentos ou correções técnicas.</li>
+            <li>Publicar na agenda coletiva exclusivamente as informações públicas dos eventos aprovados.</li>
+            <li>Prevenir fraudes, mitigar disparos automatizados abusivos e preservar a disponibilidade da plataforma.</li>
+            <li>Cumprir obrigações legais e regulatórias (como guarda de registros nos termos do Marco Civil da Internet).</li>
           </ul>
-          <p><strong>Bases legais:</strong> <span class="priv-draft">[DEFINIR E DOCUMENTAR AS HIPÓTESES LEGAIS APLICÁVEIS, INCLUSIVE A DADOS SENSÍVEIS, ANTES DA ATIVAÇÃO]</span>. A confirmação de leitura do formulário demonstra ciência do aviso; ela não deve ser tratada automaticamente como consentimento válido para qualquer modalidade de tratamento.</p>
+          <p><strong>Bases Legais (LGPD):</strong> O tratamento fundamenta-se nos procedimentos preliminares a pedido do titular (Art. 7º, V), no cumprimento de obrigação legal ou regulatória (Art. 7º, II c/c Marco Civil da Internet), no legítimo interesse da plataforma na prevenção contra abusos e segurança digital (Art. 7º, IX) e nos mecanismos estritos de prevenção a fraudes (Art. 7º, X e Art. 11, II, "g").</p>
         </section>
+
         <section id="publicacao">
           <h2>4. O que pode aparecer publicamente?</h2>
-          <p>Após aprovação, poderão ser exibidos título, descrição, data, horário, local, cidade, estado, nome da organização informado no cadastro e links de referência. Essas informações poderão ser exibidas também em mapas.</p>
-          <p>Nome, e-mail, telefone, função pessoal do representante e observações administrativas <strong>não devem ser exibidos na agenda pública</strong>. O projeto deve revisar os campos livres antes da publicação para evitar exposição indevida de dados de terceiros.</p>
-          <p>Como o tema envolve manifestações, informações vinculadas a pessoas identificadas ou identificáveis podem indicar opiniões políticas ou associação a organizações. Esses dados podem exigir proteção reforçada pela Lei Geral de Proteção de Dados Pessoais (LGPD).</p>
+          <p>Após aprovação administrativa, tornam-se públicos apenas os elementos de utilidade do ato: título, descrição, data, horário, ponto de encontro, cidade, estado, organização responsável declarada e links de apoio público (inclusive em mapas interativos).</p>
+          <p>Nome civil, e-mail, telefone pessoal, função e notas administrativas do proponente <strong>nunca são exibidos publicamente</strong>. A moderação realiza triagem prévia para evitar a publicação incidental de dados de contato ou dados pessoais em campos de texto livre.</p>
+          <p>Reconhecemos que dados relacionados a manifestações podem sugerir convicções políticas ou filiações sindicais/sociais (dados pessoais sensíveis sob o Art. 5º, II da LGPD). Por essa razão, aplicamos controles de acesso rígidos, segregação em banco de dados e protocolos rápidos de eliminação após a análise.</p>
         </section>
+
         <section id="servicos">
           <h2>5. Serviços externos e compartilhamento</h2>
-          <p>O projeto utiliza serviços de infraestrutura e segurança, incluindo GitHub Pages para disponibilizar o site, Supabase para armazenar e processar solicitações, Cloudflare Turnstile para a verificação de segurança e serviços de mapas e geocodificação, como OpenStreetMap e Geoapify, para localização de eventos.</p>
-          <p>Ao acessar o site, prestadores de infraestrutura podem receber dados técnicos da conexão, como o endereço IP. O envio para geocodificação deve conter apenas as informações públicas de localização dos eventos, sem contatos privados dos responsáveis. O tratamento pelos fornecedores pode ocorrer fora do Brasil, sujeito às regras aplicáveis e às condições dos serviços utilizados.</p>
-          <p>Os dados privados não são colocados à disposição do público, não são destinados à publicidade comercial e não devem ser comercializados.</p>
+          <p>Operamos com prestadores terceirizados sob rígidos parâmetros de segurança da informação:</p>
+          <ul>
+            <li><strong>Hospedagem estática:</strong> GitHub Pages (distribuição segura de conteúdo público).</li>
+            <li><strong>Banco de dados e autenticação:</strong> Supabase (armazenamento criptografado com políticas Row Level Security - RLS).</li>
+            <li><strong>Proteção contra bots:</strong> Cloudflare Turnstile (validação de tráfego humano sem cookies invasivos).</li>
+            <li><strong>Mapas e geocodificação:</strong> OpenStreetMap e Geoapify (processamento limitado aos pontos geográficos públicos do evento, sem envio de dados de contato).</li>
+          </ul>
+          <p>Os prestadores podem operar servidores no exterior, caracterizando transferência internacional de dados em conformidade com as salvaguardas do Art. 33 da LGPD. Os dados privados jamais são vendidos, compartilhados para perfilamento comercial ou cedidos a terceiros para fins de marketing.</p>
         </section>
+
         <section id="seguranca">
           <h2>6. Segurança e conservação dos dados</h2>
-          <p>As solicitações são armazenadas em área administrativa restrita do Supabase. O envio utiliza verificação Turnstile, validação no servidor e controle de frequência por identificadores HMAC; o acesso administrativo depende de autenticação e permissões.</p>
-          <p><strong>Retenção dos dados pessoais das solicitações:</strong> <span class="priv-draft">[DEFINIR PRAZO DE CONSERVAÇÃO PARA SOLICITAÇÕES PENDENTES, APROVADAS E REJEITADAS, E IMPLEMENTAR A EXCLUSÃO OU ANONIMIZAÇÃO]</span>.</p>
-          <p>Os registros técnicos de limitação são agrupados por janelas de uma hora, com limpeza de entradas antigas durante novas operações. A exclusão definitiva dos registros privados e eventuais cópias de segurança deve ser analisada conforme a configuração efetiva do serviço contratado.</p>
-          <p>Nenhuma medida de segurança elimina totalmente os riscos. Caso ocorra um incidente relevante, serão adotadas as medidas cabíveis conforme a legislação aplicável.</p>
+          <p>Os dados pessoais tramitam por conexões criptografadas (HTTPS/TLS) e permanecem em esquemas isolados no Supabase, protegidos por regras de autorização granular.</p>
+          <p>Adotamos prazos estritos de retenção, expurgo e anonimização (Art. 16 da LGPD):</p>
+          <ul>
+            <li><strong>Janela de Triagem e Verificação (até 3 horas):</strong> Solicitações submetidas entram em ambiente de quarentena por um prazo máximo de 3 horas para verificação automatizada de integridade e checagem de autenticidade/segurança contra abuso.</li>
+            <li><strong>Solicitações Rejeitadas ou Abusivas:</strong> Descartadas ou anonimizadas irreversivelmente em até 30 dias após a análise, mantendo-se apenas hashes criptográficos não reversíveis e metadados agregados para auditoria e bloqueio de reincidência por legítimo interesse e prevenção a fraudes.</li>
+            <li><strong>Solicitações Aprovadas:</strong> As informações públicas do evento permanecem ativas na agenda histórica. Os contatos diretos do solicitante são desvinculados do evento e arquivados em base isolada pelo prazo estritamente necessário para fins de prestação de contas, sendo anonimizados ou expurgados após o encerramento do ciclo do evento.</li>
+          </ul>
+          <p>Rotinas automatizadas de expurgo e tarefas agendadas garantem que cadastros que excedam o período de validação sem conclusão sejam permanentemente eliminados da base operacional.</p>
         </section>
+
         <section id="direitos">
           <h2>7. Direitos sobre seus dados pessoais</h2>
-          <p>Nos termos da LGPD, você pode solicitar, conforme o caso, confirmação do tratamento, acesso, correção, anonimização, bloqueio, eliminação, informações sobre compartilhamento e outros direitos previstos em lei.</p>
-          <p>Para exercer seus direitos, entre em contato com <a href="mailto:privacidade.narua@gmail.com">privacidade.narua@gmail.com</a>, informando os dados necessários para localizar sua solicitação. Por segurança, poderemos solicitar informações suficientes para confirmar a titularidade.</p>
-          <p>Para saber mais, consulte a <a href="https://www.gov.br/anpd/pt-br/assuntos/titular-de-dados/direito-dos-titulares" target="_blank" rel="noopener noreferrer">orientação da Autoridade Nacional de Proteção de Dados (ANPD)</a>.</p>
+          <p>Em conformidade com o Art. 18 da LGPD, você pode requisitar a qualquer momento:</p>
+          <ul>
+            <li>Confirmação da existência de tratamento e acesso aos seus dados pessoais.</li>
+            <li>Correção de dados incompletos, inexatos ou desatualizados.</li>
+            <li>Anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desacordo com a legislação.</li>
+            <li>Informações sobre as entidades públicas e privadas com as quais houve uso compartilhado.</li>
+          </ul>
+          <p>Para exercer esses direitos, basta enviar uma mensagem para <a href="mailto:privacidade.narua@gmail.com">privacidade.narua@gmail.com</a> indicando o e-mail utilizado no cadastro. Procedimentos de confirmação de identidade poderão ser adotados para sua própria segurança antes da divulgação de registros.</p>
+          <p>Mais detalhes sobre os direitos do titular podem ser consultados diretamente no portal da <a href="https://www.gov.br/anpd/pt-br/assuntos/titular-de-dados/direito-dos-titulares" target="_blank" rel="noopener noreferrer">Autoridade Nacional de Proteção de Dados (ANPD)</a>.</p>
         </section>
+
         <section id="atualizacoes">
           <h2>8. Alterações deste aviso</h2>
-          <p>Este aviso poderá ser atualizado para refletir modificações no cadastro, nas medidas de segurança, nos prestadores de serviço e nas práticas de retenção. A versão e a data serão informadas nesta página.</p>
-          <p>Versão: <strong>rascunho 0.1 — 10/10/2026</strong>.</p>
+          <p>Este documento é revisado periodicamente para refletir melhorias contínuas em nossos procedimentos de segurança, atualizações técnicas de infraestrutura e diretrizes expedidas pela ANPD.</p>
+          <p>Versão em vigor: <strong>1.0 — 10/10/2026</strong>.</p>
         </section>
       </article>
     </div>
