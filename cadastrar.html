@@ -1,30 +1,45 @@
 
+
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport"
+
           content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
+
           content="Cadastre uma manifestação para análise e publicação no Na Rua.">
 
     <meta name="theme-color" content="#1646A0">
 
     <title>Cadastrar Manifestação | Na Rua</title>
 
-    <!-- CSS do projeto -->
+    <!-- CSS principal -->
+
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- CSS responsivo -->
+
     <link rel="stylesheet" href="css/responsivo.css">
+
+    <!-- CSS do cadastro -->
+
     <link rel="stylesheet" href="css/cadastro.css">
+
 </head>
 
 <body>
 
     <!-- ================================= -->
+
     <!-- CABEÇALHO                         -->
+
     <!-- ================================= -->
 
     <header class="cabecalho">
@@ -32,82 +47,91 @@
         <div class="container cabecalho-conteudo">
 
             <a href="index.html#inicio" class="logo">
-                <span class="logo-icone"
-                      aria-hidden="true">✊</span>
+
+                <span class="logo-icone" aria-hidden="true">
+
+                    ✊
+
+                </span>
 
                 <span class="logo-texto">Na Rua</span>
+
             </a>
 
-            <nav class="menu"
-                 aria-label="Menu principal">
+            <nav class="menu" aria-label="Menu principal">
 
-                <a href="index.html#inicio">
-                    Início
-                </a>
+                <a href="index.html#inicio">Início</a>
 
                 <a href="index.html#manifestacoes">
+
                     Manifestações
+
                 </a>
 
-                <a href="index.html#mapa-section">
-                    Mapa
-                </a>
+                <a href="index.html#mapa-section">Mapa</a>
 
-                <a href="index.html#sobre">
-                    Sobre
-                </a>
+                <a href="index.html#sobre">Sobre</a>
 
             </nav>
 
             <a href="index.html#manifestacoes"
+
                class="botao botao-destaque">
+
                 Voltar à agenda
+
             </a>
 
         </div>
 
     </header>
 
-
-    <!-- ================================= -->
-    <!-- CONTEÚDO PRINCIPAL                -->
-    <!-- ================================= -->
-
     <main>
 
-        <!-- APRESENTAÇÃO -->
+        <!-- ================================= -->
+
+        <!-- APRESENTAÇÃO DA PÁGINA            -->
+
+        <!-- ================================= -->
 
         <section class="cad-hero">
 
             <div class="container">
 
                 <span class="cad-selo">
+
                     PARTICIPE DA AGENDA
+
                 </span>
 
                 <h1>Divulgue uma manifestação</h1>
 
                 <p>
-                    Compartilhe informações de
-                    manifestações, assembleias,
-                    atos públicos e atividades
-                    estudantis realizadas em
-                    todo o Brasil.
+
+                    Compartilhe informações de manifestações,
+
+                    assembleias, atos públicos e atividades
+
+                    estudantis realizadas em todo o Brasil.
+
                 </p>
 
                 <p>
-                    Todas as solicitações serão
-                    analisadas antes de serem
-                    publicadas.
+
+                    Todas as solicitações serão analisadas
+
+                    antes de serem publicadas.
+
                 </p>
 
             </div>
 
         </section>
 
-
         <!-- ================================= -->
+
         <!-- ÁREA DO FORMULÁRIO                -->
+
         <!-- ================================= -->
 
         <section class="cad-area">
@@ -115,135 +139,181 @@
             <div class="container cad-layout">
 
                 <form
+
                     id="form-cadastro"
+
                     class="cad-formulario"
+
                     method="post"
+
                 >
 
-                    <!-- ====================== -->
-                    <!-- ETAPA 1                -->
-                    <!-- INFORMAÇÕES DO EVENTO  -->
-                    <!-- ====================== -->
+                    <!-- ========================== -->
+
+                    <!-- ETAPA 1 - INFORMAÇÕES       -->
+
+                    <!-- ========================== -->
 
                     <div class="cad-card">
 
                         <div class="cad-card-topo">
 
-                            <span class="cad-passo">
-                                01
-                            </span>
+                            <span class="cad-passo">01</span>
 
                             <div>
+
                                 <h2>Informações do evento</h2>
 
                                 <p>
+
                                     Informe os dados principais
+
                                     da manifestação.
+
                                 </p>
+
                             </div>
 
                         </div>
 
-
                         <div class="cad-grid">
-
-                            <!-- NOME -->
 
                             <div class="cad-campo">
 
                                 <label for="titulo">
+
                                     Nome da manifestação
+
                                     <span class="cad-obrigatorio">*</span>
+
                                 </label>
 
                                 <input
+
                                     type="text"
+
                                     id="titulo"
+
                                     name="titulo"
+
                                     placeholder="Ex.: Assembleia estudantil"
+
                                     minlength="8"
+
                                     maxlength="120"
+
                                     required
+
                                 >
 
                             </div>
 
-
-                            <!-- CATEGORIA -->
-
                             <div class="cad-campo">
 
                                 <label for="categoria">
+
                                     Tipo de atividade
+
                                     <span class="cad-obrigatorio">*</span>
+
                                 </label>
 
                                 <select
+
                                     id="categoria"
+
                                     name="categoria"
+
                                     required
+
                                 >
 
                                     <option value="">
+
                                         Selecione uma categoria
+
                                     </option>
 
                                     <option value="Manifestação">
+
                                         Manifestação / ato público
+
                                     </option>
 
                                     <option value="Manifestação estudantil">
+
                                         Manifestação estudantil
+
                                     </option>
 
                                     <option value="Assembleia">
+
                                         Assembleia
+
                                     </option>
 
                                     <option value="Plenária">
+
                                         Plenária
+
                                     </option>
 
                                     <option value="Aula pública">
+
                                         Aula pública
+
                                     </option>
 
                                     <option value="Oficina">
+
                                         Oficina
+
                                     </option>
 
                                     <option value="Outra atividade">
+
                                         Outra atividade
+
                                     </option>
 
                                 </select>
 
                             </div>
 
-
-                            <!-- DESCRIÇÃO -->
-
                             <div class="cad-campo">
 
                                 <label for="descricao">
+
                                     Descrição
+
                                     <span class="cad-obrigatorio">*</span>
+
                                 </label>
 
                                 <textarea
+
                                     id="descricao"
+
                                     name="descricao"
+
                                     rows="5"
+
                                     minlength="20"
+
                                     maxlength="1500"
+
                                     placeholder="Descreva o evento, objetivo e informações importantes."
+
                                     required
+
                                 ></textarea>
 
                                 <small>
-                                    Não inclua telefones pessoais
-                                    ou informações privadas
-                                    nesta descrição.
+
+                                    Não inclua telefones pessoais ou
+
+                                    informações privadas nesta descrição.
+
                                 </small>
 
                             </div>
@@ -252,206 +322,280 @@
 
                     </div>
 
+                    <!-- ========================== -->
 
+                    <!-- ETAPA 2 - LOCALIZAÇÃO       -->
 
-                    <!-- ====================== -->
-                    <!-- ETAPA 2                -->
-                    <!-- DATA E LOCALIZAÇÃO     -->
-                    <!-- ====================== -->
+                    <!-- ========================== -->
 
                     <div class="cad-card">
 
                         <div class="cad-card-topo">
 
-                            <span class="cad-passo">
-                                02
-                            </span>
+                            <span class="cad-passo">02</span>
 
                             <div>
+
                                 <h2>Data e localização</h2>
 
                                 <p>
+
                                     Informe onde e quando
+
                                     acontecerá a manifestação.
+
                                 </p>
+
                             </div>
 
                         </div>
 
-
                         <div class="cad-grid cad-grid-2">
-
-                            <!-- DATA -->
 
                             <div class="cad-campo">
 
                                 <label for="data">
+
                                     Data
+
                                     <span class="cad-obrigatorio">*</span>
+
                                 </label>
 
                                 <input
+
                                     type="date"
+
                                     id="data"
+
                                     name="data"
+
                                     required
+
                                 >
 
                             </div>
-
-
-                            <!-- HORÁRIO -->
 
                             <div class="cad-campo">
 
                                 <label for="horario">
+
                                     Horário de concentração
+
                                     <span class="cad-obrigatorio">*</span>
+
                                 </label>
 
                                 <input
+
                                     type="time"
+
                                     id="horario"
+
                                     name="horario"
+
                                     required
+
                                 >
 
                             </div>
 
-
-                            <!-- ESTADO -->
-
                             <div class="cad-campo">
 
                                 <label for="estado">
+
                                     Estado
+
                                     <span class="cad-obrigatorio">*</span>
+
                                 </label>
 
                                 <select
+
                                     id="estado"
+
                                     name="estado"
+
                                     required
+
                                 >
 
                                     <option value="">
+
                                         Selecione o estado
+
                                     </option>
 
                                     <option value="AC">Acre</option>
+
                                     <option value="AL">Alagoas</option>
+
                                     <option value="AP">Amapá</option>
+
                                     <option value="AM">Amazonas</option>
+
                                     <option value="BA">Bahia</option>
+
                                     <option value="CE">Ceará</option>
+
                                     <option value="DF">Distrito Federal</option>
+
                                     <option value="ES">Espírito Santo</option>
+
                                     <option value="GO">Goiás</option>
+
                                     <option value="MA">Maranhão</option>
+
                                     <option value="MT">Mato Grosso</option>
+
                                     <option value="MS">Mato Grosso do Sul</option>
+
                                     <option value="MG">Minas Gerais</option>
+
                                     <option value="PA">Pará</option>
+
                                     <option value="PB">Paraíba</option>
+
                                     <option value="PR">Paraná</option>
+
                                     <option value="PE">Pernambuco</option>
+
                                     <option value="PI">Piauí</option>
+
                                     <option value="RJ">Rio de Janeiro</option>
+
                                     <option value="RN">Rio Grande do Norte</option>
+
                                     <option value="RS">Rio Grande do Sul</option>
+
                                     <option value="RO">Rondônia</option>
+
                                     <option value="RR">Roraima</option>
+
                                     <option value="SC">Santa Catarina</option>
+
                                     <option value="SP">São Paulo</option>
+
                                     <option value="SE">Sergipe</option>
+
                                     <option value="TO">Tocantins</option>
 
                                 </select>
 
                             </div>
 
-
-                            <!-- CIDADE -->
-
                             <div class="cad-campo">
 
                                 <label for="cidade">
+
                                     Cidade
+
                                     <span class="cad-obrigatorio">*</span>
+
                                 </label>
 
                                 <input
+
                                     type="text"
+
                                     id="cidade"
+
                                     name="cidade"
+
                                     maxlength="100"
+
                                     placeholder="Ex.: Rio de Janeiro"
+
                                     required
+
                                 >
 
                             </div>
-
-
-                            <!-- LOCAL -->
 
                             <div class="cad-campo cad-largura-total">
 
                                 <label for="local">
+
                                     Local de concentração
+
                                     <span class="cad-obrigatorio">*</span>
+
                                 </label>
 
                                 <input
+
                                     type="text"
+
                                     id="local"
+
                                     name="local"
+
                                     maxlength="200"
+
                                     placeholder="Ex.: Praça da Estação, entrada principal"
+
                                     required
+
                                 >
 
                             </div>
-
-
-                            <!-- REFERÊNCIA -->
 
                             <div class="cad-campo cad-largura-total">
 
                                 <label for="referencia">
+
                                     Endereço complementar
+
                                     <span class="cad-opcional">
+
                                         (opcional)
+
                                     </span>
+
                                 </label>
 
                                 <input
+
                                     type="text"
+
                                     id="referencia"
+
                                     name="referencia"
+
                                     maxlength="250"
+
                                     placeholder="Rua, bairro ou ponto de referência"
+
                                 >
 
                             </div>
 
-
-                            <!-- TRAJETO -->
-
                             <div class="cad-campo cad-largura-total">
 
                                 <label for="trajeto">
+
                                     Trajeto previsto
+
                                     <span class="cad-opcional">
+
                                         (opcional)
+
                                     </span>
+
                                 </label>
 
                                 <textarea
+
                                     id="trajeto"
+
                                     name="trajeto"
+
                                     rows="3"
+
                                     maxlength="600"
+
                                     placeholder="Informe o percurso, caso exista."
+
                                 ></textarea>
 
                             </div>
@@ -460,57 +604,65 @@
 
                     </div>
 
+                    <!-- ========================== -->
 
+                    <!-- ETAPA 3 - ORGANIZAÇÃO       -->
 
-                    <!-- ====================== -->
-                    <!-- ETAPA 3                -->
-                    <!-- ORGANIZAÇÃO            -->
-                    <!-- ====================== -->
+                    <!-- ========================== -->
 
                     <div class="cad-card">
 
                         <div class="cad-card-topo">
 
-                            <span class="cad-passo">
-                                03
-                            </span>
+                            <span class="cad-passo">03</span>
 
                             <div>
+
                                 <h2>Organização e responsável</h2>
 
                                 <p>
+
                                     Informe a entidade organizadora
+
                                     e um contato para verificação.
+
                                 </p>
+
                             </div>
 
                         </div>
-
-
-                        <!-- ORGANIZAÇÃO -->
 
                         <div class="cad-grid">
 
                             <div class="cad-campo">
 
                                 <label for="organizador">
+
                                     Organização ou coletivo
+
                                     <span class="cad-obrigatorio">*</span>
+
                                 </label>
 
                                 <input
+
                                     type="text"
+
                                     id="organizador"
+
                                     name="organizador"
+
                                     maxlength="160"
+
                                     placeholder="Nome da organização responsável"
+
                                     required
+
                                 >
 
                             </div>
 
                         </div>
-
 
                         <!-- ÁREA DE DADOS PRIVADOS -->
 
@@ -518,232 +670,292 @@
 
                             <div class="cad-privado-cabecalho">
 
-                                <span aria-hidden="true">
-                                    🔒
-                                </span>
+                                <span aria-hidden="true">🔒</span>
 
                                 <strong>
-                                    Informações privadas —
-                                    somente para análise
-                                    administrativa
+
+                                    Informações privadas — somente
+
+                                    para análise administrativa
+
                                 </strong>
 
                             </div>
 
-
                             <div class="cad-grid cad-grid-2">
-
-                                <!-- NOME DO RESPONSÁVEL -->
 
                                 <div class="cad-campo">
 
                                     <label for="representante_nome">
+
                                         Nome do responsável
+
                                         <span class="cad-obrigatorio">*</span>
+
                                     </label>
 
                                     <input
+
                                         type="text"
+
                                         id="representante_nome"
+
                                         name="representante_nome"
+
                                         autocomplete="name"
+
                                         maxlength="120"
+
                                         required
+
                                     >
 
                                 </div>
-
-
-                                <!-- E-MAIL -->
 
                                 <div class="cad-campo">
 
                                     <label for="representante_email">
+
                                         E-mail do responsável
+
                                         <span class="cad-obrigatorio">*</span>
+
                                     </label>
 
                                     <input
+
                                         type="email"
+
                                         id="representante_email"
+
                                         name="representante_email"
+
                                         autocomplete="email"
+
                                         maxlength="254"
+
                                         placeholder="contato@exemplo.org"
+
                                         required
+
                                     >
 
                                 </div>
-
-
-                                <!-- TELEFONE -->
 
                                 <div class="cad-campo">
 
                                     <label for="representante_telefone">
+
                                         Telefone / WhatsApp
+
                                         <span class="cad-opcional">
+
                                             (opcional)
+
                                         </span>
+
                                     </label>
 
                                     <input
+
                                         type="tel"
+
                                         id="representante_telefone"
+
                                         name="representante_telefone"
+
                                         autocomplete="tel"
+
                                         maxlength="25"
+
                                         placeholder="(21) 99999-9999"
+
                                     >
 
                                 </div>
 
-
-                                <!-- FUNÇÃO -->
-
                                 <div class="cad-campo">
 
                                     <label for="representante_funcao">
+
                                         Função na organização
+
                                         <span class="cad-opcional">
+
                                             (opcional)
+
                                         </span>
+
                                     </label>
 
                                     <input
+
                                         type="text"
+
                                         id="representante_funcao"
+
                                         name="representante_funcao"
+
                                         maxlength="100"
+
                                         placeholder="Ex.: responsável pela divulgação"
+
                                     >
 
                                 </div>
 
                             </div>
 
-
                             <p class="cad-privado-nota">
-                                Não solicitamos CPF, RG,
-                                endereço residencial ou dados
-                                pessoais dos participantes.
 
-                                Os contatos fornecidos não serão
-                                exibidos no site público.
+                                Não solicitamos CPF, RG, endereço residencial ou dados
+                                pessoais de participantes. Os contatos do responsável são privados.
+                                O nome da organização e as informações públicas do evento
+                                poderão aparecer na agenda depois de aprovação.
+
                             </p>
 
                         </div>
 
                     </div>
 
+                    <!-- ========================== -->
 
+                    <!-- ETAPA 4 - VERIFICAÇÃO       -->
 
-                    <!-- ====================== -->
-                    <!-- ETAPA 4                -->
-                    <!-- FONTES E DECLARAÇÕES   -->
-                    <!-- ====================== -->
+                    <!-- ========================== -->
 
                     <div class="cad-card">
 
                         <div class="cad-card-topo">
 
-                            <span class="cad-passo">
-                                04
-                            </span>
+                            <span class="cad-passo">04</span>
 
                             <div>
+
                                 <h2>Fonte e confirmação</h2>
 
                                 <p>
+
                                     Envie referências que permitam
-                                    verificar as informações
-                                    do evento.
+
+                                    verificar as informações do evento.
+
                                 </p>
+
                             </div>
 
                         </div>
 
-
                         <div class="cad-grid">
-
-                            <!-- FONTE -->
 
                             <div class="cad-campo">
 
                                 <label for="fonte">
+
                                     Link da divulgação oficial
+
                                     <span class="cad-opcional">
+
                                         (opcional)
+
                                     </span>
+
                                 </label>
 
                                 <input
+
                                     type="url"
+
                                     id="fonte"
+
                                     name="fonte"
+
                                     maxlength="500"
+
                                     placeholder="https://www.instagram.com/p/..."
+
                                 >
 
                                 <small>
+
                                     Prefira links de publicações
+
                                     dos próprios organizadores.
+
                                 </small>
 
                             </div>
-
-
-                            <!-- CARTAZ -->
 
                             <div class="cad-campo">
 
                                 <label for="cartaz_url">
+
                                     Link do cartaz
+
                                     <span class="cad-opcional">
+
                                         (opcional)
+
                                     </span>
+
                                 </label>
 
                                 <input
+
                                     type="url"
+
                                     id="cartaz_url"
+
                                     name="cartaz_url"
+
                                     maxlength="500"
+
                                     placeholder="https://exemplo.org/cartaz.jpg"
+
                                 >
 
                                 <small>
-                                    O envio direto de imagens
-                                    será implementado
-                                    posteriormente.
+
+                                    O envio direto de imagens será
+
+                                    implementado posteriormente.
+
                                 </small>
 
                             </div>
 
-
-                            <!-- OBSERVAÇÕES -->
-
                             <div class="cad-campo">
 
                                 <label for="observacoes">
+
                                     Observações para a administração
+
                                     <span class="cad-opcional">
+
                                         (opcional)
+
                                     </span>
+
                                 </label>
 
                                 <textarea
+
                                     id="observacoes"
+
                                     name="observacoes"
+
                                     rows="4"
+
                                     maxlength="1000"
+
                                     placeholder="Informações adicionais para verificar o evento."
+
                                 ></textarea>
 
                             </div>
 
                         </div>
-
 
                         <!-- DECLARAÇÕES -->
 
@@ -752,159 +964,127 @@
                             <label class="cad-checkbox">
 
                                 <input
+
                                     type="checkbox"
+
                                     id="declaracao_autorizacao"
+
                                     name="declaracao_autorizacao"
+
                                     required
+
                                 >
 
                                 <span>
+
                                     Declaro que as informações
+
                                     fornecidas são verdadeiras
+
                                     segundo meu conhecimento e
+
                                     que possuo autorização para
+
                                     informar os dados de contato
+
                                     do responsável.
+
                                     <strong>*</strong>
+
                                 </span>
 
                             </label>
 
-
                             <label class="cad-checkbox">
-
                                 <input
                                     type="checkbox"
                                     id="declaracao_privacidade"
                                     name="declaracao_privacidade"
                                     required
                                 >
-
                                 <span>
-                                    Estou ciente de que os dados
-                                    pessoais serão utilizados
-                                    exclusivamente para análise
-                                    da solicitação, conforme a
-                                    política de privacidade a ser
-                                    publicada antes da ativação
-                                    dos cadastros, e não serão
-                                    publicados na agenda.
+                                    Li o <a href="politica-de-privacidade.html" target="_blank" rel="noopener noreferrer">Aviso de Privacidade do Na Rua</a>
+                                    e estou ciente de que meus dados de contato serão utilizados
+                                    para verificar a solicitação, pedir esclarecimentos e proteger o cadastro
+                                    contra abuso. Os dados privados do responsável não serão publicados.
                                     <strong>*</strong>
                                 </span>
-
                             </label>
 
                         </div>
 
                     </div>
 
-
-
-                    <!-- ====================== -->
-                    <!-- ETAPA 5                -->
-                    <!-- CLOUDFLARE TURNSTILE   -->
-                    <!-- ====================== -->
-
-                    <div
-                        class="cad-card"
-                        id="verificacao-seguranca"
-                    >
-
+                    <!-- ========================== -->
+                    <!-- ETAPA 5 - SEGURANÇA         -->
+                    <!-- ========================== -->
+                    <div class="cad-card" id="verificacao-seguranca">
                         <div class="cad-card-topo">
-
-                            <span class="cad-passo">
-                                05
-                            </span>
-
+                            <span class="cad-passo">05</span>
                             <div>
-
-                                <h2>
-                                    Verificação de segurança
-                                </h2>
-
-                                <p>
-                                    Confirme a verificação
-                                    antes de enviar
-                                    sua solicitação.
-                                </p>
-
+                                <h2>Verificação de segurança</h2>
+                                <p>Confirme a verificação antes de enviar sua solicitação.</p>
                             </div>
-
                         </div>
-
-
-                        <!--
-                            Esta é a Site Key pública.
-
-                            A Secret Key fica SOMENTE
-                            no Supabase Edge Functions
-                            → Secrets.
-                        -->
-
+                        <!-- A Site Key é pública; a Secret Key fica somente no Supabase. -->
                         <div
                             class="cf-turnstile"
                             data-sitekey="0x4AAAAAAFS2-5ATqHQXJfnz"
                             data-language="pt-BR"
-                            data-theme="light"
-                        ></div>
-
-
+                            data-theme="light">
+                        </div>
                         <p class="cad-texto-final">
-                            Se o desafio não aparecer,
-                            confirme que o endereço do
-                            Live Server está autorizado
-                            no Cloudflare Turnstile.
+                            A verificação utiliza o Cloudflare Turnstile. Caso não apareça,
+                            atualize a página ou tente outro navegador. Veja o
+                            <a href="politica-de-privacidade.html">Aviso de Privacidade</a>.
                         </p>
-
                     </div>
 
+                    <!-- ========================== -->
 
+                    <!-- FINALIZAÇÃO                -->
 
-                    <!-- ====================== -->
-                    <!-- FINALIZAÇÃO            -->
-                    <!-- ====================== -->
+                    <!-- ========================== -->
 
                     <div class="cad-finalizacao">
 
-                        <p
-                            id="cad-status"
-                            class="cad-modo-teste"
-                            role="status"
-                            aria-live="polite"
-                        >
-                            Integração em testes:
-                            o envio ainda está desativado.
-                            Nenhum dado será enviado ao
-                            preencher este formulário.
+                        <p id="cad-status" class="cad-modo-teste" role="status" aria-live="polite">
+                            O envio depende da verificação de segurança e da disponibilidade
+                            do serviço. O registro só poderá ser publicado após análise administrativa.
                         </p>
 
-
                         <button
+
                             type="submit"
+
                             id="botao-enviar"
+
                             class="botao cad-botao-enviar"
+
                             disabled
+
                         >
+
                             Enviar para aprovação (em breve)
+
                         </button>
 
-
                         <p class="cad-texto-final">
-                            O envio será habilitado após
-                            os testes da Edge Function,
-                            os controles contra abuso e
-                            a publicação da política
-                            de privacidade.
+
+                            Ao enviar, você solicita uma análise, não uma publicação automática.
+                            Não inclua dados pessoais de participantes nos campos públicos.
+                            Consulte o <a href="politica-de-privacidade.html">Aviso de Privacidade</a>.
+
                         </p>
 
                     </div>
 
                 </form>
 
-
-
                 <!-- ================================= -->
+
                 <!-- BARRA LATERAL                    -->
+
                 <!-- ================================= -->
 
                 <aside class="cad-lateral">
@@ -916,57 +1096,70 @@
                         <ol class="cad-passos-lista">
 
                             <li>
+
                                 Você preenche as informações
+
                                 da manifestação.
+
                             </li>
 
                             <li>
+
                                 A solicitação é enviada
+
                                 para uma área privada.
+
                             </li>
 
                             <li>
+
                                 A administração verifica
+
                                 os dados e as fontes.
+
                             </li>
 
                             <li>
-                                Somente manifestações
-                                aprovadas aparecem
-                                publicamente.
+
+                                Somente manifestações aprovadas
+
+                                aparecem publicamente.
+
                             </li>
 
                         </ol>
 
                     </div>
 
-
                     <div class="cad-lateral-card cad-lateral-destaque">
 
                         <h2>Privacidade primeiro</h2>
 
                         <p>
-                            Informações pessoais dos
-                            representantes não serão
-                            exibidas publicamente.
+
+                            Nome, e-mail, telefone e função do representante
+                            são utilizados apenas para verificação administrativa;
+                            os campos públicos da manifestação poderão aparecer na agenda
+                            depois da aprovação.
+
                         </p>
 
                         <p>
-                            Antes de habilitar o cadastro,
-                            publicaremos a política
-                            de privacidade e definiremos
-                            as regras de armazenamento
-                            e exclusão desses dados.
+
+                            Leia como os dados são tratados, quem poderá ter acesso
+                            e como exercer seus direitos no
+                            <a href="politica-de-privacidade.html">Aviso de Privacidade</a>.
+
                         </p>
 
                     </div>
 
+                    <a href="index.html#manifestacoes"
 
-                    <a
-                        href="index.html#manifestacoes"
-                        class="cad-link-voltar"
-                    >
+                       class="cad-link-voltar">
+
                         ← Consultar a agenda
+
                     </a>
 
                 </aside>
@@ -977,10 +1170,10 @@
 
     </main>
 
-
-
     <!-- ================================= -->
+
     <!-- RODAPÉ                            -->
+
     <!-- ================================= -->
 
     <footer class="rodape">
@@ -992,84 +1185,53 @@
                 <h3>Na Rua</h3>
 
                 <p>
-                    Informação pública,
-                    acessível e organizada.
+
+                    Informação pública, acessível
+
+                    e organizada.
+
                 </p>
 
             </div>
 
-
             <div class="rodape-links">
 
-                <a href="index.html#inicio">
-                    Início
-                </a>
+                <a href="index.html#inicio">Início</a>
 
-                <a href="index.html#manifestacoes">
-                    Agenda
-                </a>
+                <a href="index.html#manifestacoes">Agenda</a>
 
-                <a href="index.html#sobre">
-                    Sobre
-                </a>
+                <a href="index.html#sobre">Sobre</a>
+
+                <a href="politica-de-privacidade.html">Privacidade</a>
 
             </div>
 
         </div>
 
-
         <div class="rodape-final">
 
             <p>
+
                 &copy; 2026 Na Rua.
+
                 Todos os direitos reservados.
+
             </p>
 
         </div>
 
     </footer>
 
+    <!-- Supabase: biblioteca pública e cliente configurado em js/supabase.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="js/supabase.js" defer></script>
 
+    <!-- Cloudflare Turnstile, renderização automática do widget -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
-    <!-- ================================= -->
-    <!-- BIBLIOTECA SUPABASE               -->
-    <!-- ================================= -->
-
-    <script
-        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-        defer>
-    </script>
-
-
-    <!-- CONFIGURAÇÃO DO PROJETO SUPABASE -->
-
-    <script
-        src="js/supabase.js"
-        defer>
-    </script>
-
-
-
-    <!-- ================================= -->
-    <!-- CLOUDFLARE TURNSTILE              -->
-    <!-- ================================= -->
-
-    <script
-        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-        async
-        defer>
-    </script>
-
-
-
-    <!-- ================================= -->
-    <!-- JAVASCRIPT DO CADASTRO            -->
-    <!-- ================================= -->
-
-    <script
-        src="js/cadastro.js"
-        defer>
-    </script>
+    <!-- Código específico da página de cadastro -->
+    <script src="js/cadastro.js" defer></script>
 
 </body>
+
 </html>
