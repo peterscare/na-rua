@@ -1,0 +1,516 @@
+
+/* ==========================================
+   NA RUA - AGENDA DE MANIFESTAÇÕES
+   Arquivo: css/responsivo.css
+   ========================================== */
+
+
+/* ==========================================
+   1. NOTEBOOKS E TABLETS
+   Telas de até 1024px
+   ========================================== */
+
+@media screen and (max-width: 1024px) {
+
+    /* CONFIGURAÇÕES GERAIS */
+
+    .container {
+        width: 92%;
+    }
+
+    section {
+        padding: 70px 0;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+
+    /* CABEÇALHO */
+
+    .cabecalho-conteudo {
+        gap: 15px;
+    }
+
+    .menu {
+        gap: 16px;
+    }
+
+    .menu a {
+        font-size: 0.88rem;
+    }
+
+    .cabecalho .botao-destaque {
+        padding: 11px 14px;
+        font-size: 0.85rem;
+    }
+
+
+    /* SEÇÃO INICIAL */
+
+    .hero {
+        padding: 90px 0 105px;
+    }
+
+    .hero h1 {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+    }
+
+
+    /* FILTROS */
+
+    .form-filtros {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .form-filtros .botao {
+        width: 100%;
+    }
+
+
+    /* MANIFESTAÇÕES */
+
+    .grade-manifestacoes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+
+    /* MAPA */
+
+    .mapa-container {
+        height: 450px;
+    }
+
+}
+
+
+/* ==========================================
+   2. TABLETS PEQUENOS
+   Telas de até 768px
+   ========================================== */
+
+@media screen and (max-width: 768px) {
+
+    /* CONFIGURAÇÕES GERAIS */
+
+    section {
+        padding: 60px 0;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+
+    /* CABEÇALHO */
+
+    .cabecalho-conteudo {
+        min-height: 75px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 13px 0;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    .logo-icone {
+        width: 38px;
+        height: 38px;
+        font-size: 1.3rem;
+    }
+
+    /*
+       Menu de navegação em uma linha separada.
+       Não é necessário JavaScript.
+    */
+
+    .menu {
+        order: 3;
+        width: 100%;
+
+        display: flex;
+        justify-content: center;
+
+        gap: 22px;
+        padding: 12px 0 2px;
+
+        border-top: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .menu a {
+        font-size: 0.9rem;
+    }
+
+
+    /* SEÇÃO INICIAL */
+
+    .hero {
+        padding: 75px 0 95px;
+    }
+
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+
+    .hero p {
+        font-size: 1.05rem;
+    }
+
+
+    /* PAINEL DE FILTROS */
+
+    .painel-filtros {
+        margin-top: -40px;
+        padding: 28px;
+    }
+
+    .painel-filtros h2 {
+        font-size: 1.4rem;
+    }
+
+
+    /* AGENDA */
+
+    .secao-cabecalho {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .ordenacao {
+        width: 100%;
+        max-width: 280px;
+    }
+
+
+    /* MAPA */
+
+    .mapa-container {
+        height: 400px;
+    }
+
+
+    /* DIVULGAÇÃO */
+
+    .divulgar-conteudo h2 {
+        font-size: 1.85rem;
+    }
+
+
+    /* RODAPÉ */
+
+    .rodape-conteudo {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+}
+
+
+/* ==========================================
+   3. CELULARES
+   Telas de até 600px
+   ========================================== */
+
+@media screen and (max-width: 600px) {
+
+    /* CONFIGURAÇÕES GERAIS */
+
+    .container {
+        width: 92%;
+    }
+
+    section {
+        padding: 50px 0;
+    }
+
+    h2 {
+        font-size: 1.65rem;
+    }
+
+    p {
+        font-size: 0.95rem;
+    }
+
+
+    /* CABEÇALHO */
+
+    .cabecalho {
+        position: relative;
+    }
+
+    .cabecalho-conteudo {
+        gap: 12px;
+        padding: 15px 0;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    .cabecalho .botao-destaque {
+        padding: 10px 12px;
+        font-size: 0.76rem;
+    }
+
+    .menu {
+        justify-content: flex-start;
+        gap: 20px;
+
+        overflow-x: auto;
+        white-space: nowrap;
+
+        scrollbar-width: thin;
+    }
+
+    .menu a {
+        font-size: 0.85rem;
+        flex-shrink: 0;
+    }
+
+
+    /* SEÇÃO INICIAL */
+
+    .hero {
+        padding: 65px 0 90px;
+    }
+
+    .hero::before {
+        width: 230px;
+        height: 230px;
+
+        right: -110px;
+        top: -90px;
+    }
+
+    .hero h1 {
+        font-size: 2.3rem;
+        line-height: 1.18;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .etiqueta {
+        font-size: 0.75rem;
+        padding: 7px 12px;
+    }
+
+    .hero .botao {
+        width: 100%;
+    }
+
+
+    /* FILTROS */
+
+    .secao-filtros {
+        padding-bottom: 35px;
+    }
+
+    .painel-filtros {
+        padding: 22px;
+        margin-top: -35px;
+        border-radius: 15px;
+    }
+
+    .painel-filtros h2 {
+        font-size: 1.35rem;
+    }
+
+    .form-filtros {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .campo-filtro input,
+    .campo-filtro select {
+        height: 48px;
+        font-size: 16px;
+    }
+
+    .form-filtros .botao {
+        width: 100%;
+        min-height: 48px;
+    }
+
+
+    /* AGENDA DE MANIFESTAÇÕES */
+
+    .secao-manifestacoes {
+        padding-top: 35px;
+        padding-bottom: 65px;
+    }
+
+    .secao-cabecalho {
+        margin-bottom: 25px;
+    }
+
+    .secao-cabecalho h2 {
+        font-size: 1.7rem;
+    }
+
+    .grade-manifestacoes {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+
+    /* CARTÕES */
+
+    .cartao-topo {
+        padding: 15px 18px;
+    }
+
+    .cartao-conteudo {
+        padding: 20px;
+    }
+
+    .cartao-titulo {
+        font-size: 1.2rem;
+    }
+
+    .cartao-descricao {
+        font-size: 0.9rem;
+    }
+
+    .cartao-rodape {
+        padding: 0 20px 22px;
+    }
+
+
+    /* MAPA INTERATIVO */
+
+    .secao-mapa {
+        padding: 55px 0;
+    }
+
+    .mapa-container {
+        height: 350px;
+        border-radius: 12px;
+    }
+
+
+    /* DIVULGAR MANIFESTAÇÃO */
+
+    .secao-divulgar {
+        padding: 65px 0;
+    }
+
+    .divulgar-conteudo h2 {
+        font-size: 1.7rem;
+    }
+
+    .divulgar-conteudo p {
+        font-size: 0.98rem;
+    }
+
+    .divulgar-conteudo .botao {
+        width: 100%;
+    }
+
+
+    /* SOBRE */
+
+    .secao-sobre p {
+        font-size: 0.95rem;
+        line-height: 1.8;
+    }
+
+    .aviso {
+        padding: 15px;
+    }
+
+
+    /* RODAPÉ */
+
+    .rodape {
+        padding-top: 45px;
+    }
+
+    .rodape-links {
+        gap: 15px 22px;
+    }
+
+    .rodape-links a {
+        font-size: 0.85rem;
+    }
+
+}
+
+
+/* ==========================================
+   4. CELULARES MUITO PEQUENOS
+   Telas de até 380px
+   ========================================== */
+
+@media screen and (max-width: 380px) {
+
+    .logo {
+        font-size: 1.25rem;
+    }
+
+    .logo-icone {
+        width: 34px;
+        height: 34px;
+    }
+
+    .cabecalho .botao-destaque {
+        font-size: 0.7rem;
+        padding: 9px 10px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .painel-filtros {
+        padding: 18px;
+    }
+
+    .cartao-topo {
+        flex-wrap: wrap;
+    }
+
+    .mapa-container {
+        height: 300px;
+    }
+
+}
+
+
+/* ==========================================
+   5. DISPOSITIVOS COM TOQUE
+   ========================================== */
+
+@media (hover: none) {
+
+    .botao:hover,
+    .cartao-manifestacao:hover {
+        transform: none;
+    }
+
+}
+
+
+/* ==========================================
+   6. TELAS COM MOVIMENTO REDUZIDO
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    .botao,
+    .cartao-manifestacao {
+        transition: none;
+    }
+
+}

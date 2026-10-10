@@ -1,0 +1,846 @@
+
+/* ==========================================
+   NA RUA - AGENDA DE MANIFESTAÇÕES
+   Arquivo: css/style.css
+   ========================================== */
+
+
+/* ==========================================
+   1. VARIÁVEIS E CORES
+   ========================================== */
+
+:root {
+    --azul: #1646A0;
+    --azul-escuro: #102E65;
+    --azul-claro: #EAF2FF;
+
+    --amarelo: #FFD447;
+    --amarelo-escuro: #E9AD14;
+
+    --vermelho: #E63946;
+
+    --branco: #FFFFFF;
+    --fundo: #F5F7FC;
+    --texto: #202B40;
+    --texto-secundario: #657187;
+    --borda: #E0E6F0;
+
+    --sombra: 0 6px 24px rgba(16, 46, 101, 0.08);
+    --sombra-hover: 0 12px 32px rgba(16, 46, 101, 0.15);
+
+    --raio: 12px;
+    --raio-grande: 20px;
+
+    --largura-maxima: 1200px;
+}
+
+
+/* ==========================================
+   2. CONFIGURAÇÕES GERAIS
+   ========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--fundo);
+    color: var(--texto);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.container {
+    width: 90%;
+    max-width: var(--largura-maxima);
+    margin: 0 auto;
+}
+
+section {
+    padding: 85px 0;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 2.2rem;
+    color: var(--azul-escuro);
+    margin-bottom: 16px;
+}
+
+p {
+    color: var(--texto-secundario);
+}
+
+:focus-visible {
+    outline: 3px solid var(--vermelho);
+    outline-offset: 3px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+
+/* ==========================================
+   3. BOTÕES
+   ========================================== */
+
+.botao {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    padding: 13px 22px;
+
+    border: 2px solid transparent;
+    border-radius: 9px;
+
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-align: center;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.botao:hover {
+    transform: translateY(-2px);
+}
+
+.botao-primario {
+    background-color: var(--amarelo);
+    color: var(--azul-escuro);
+}
+
+.botao-primario:hover {
+    background-color: var(--amarelo-escuro);
+    box-shadow: var(--sombra-hover);
+}
+
+.botao-destaque {
+    background-color: var(--amarelo);
+    color: var(--azul-escuro);
+}
+
+.botao-destaque:hover {
+    background-color: var(--branco);
+}
+
+.botao-buscar {
+    background-color: var(--azul);
+    color: var(--branco);
+}
+
+.botao-buscar:hover {
+    background-color: var(--azul-escuro);
+}
+
+.botao-limpar {
+    background-color: var(--branco);
+    border-color: var(--borda);
+    color: var(--azul-escuro);
+}
+
+.botao-limpar:hover {
+    background-color: var(--azul-claro);
+}
+
+
+/* ==========================================
+   4. CABEÇALHO
+   ========================================== */
+
+.cabecalho {
+    background-color: var(--azul);
+    color: var(--branco);
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+}
+
+.cabecalho-conteudo {
+    min-height: 82px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 1.65rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.logo-icone {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 42px;
+    height: 42px;
+
+    background-color: var(--amarelo);
+    border-radius: 12px;
+
+    font-size: 1.5rem;
+}
+
+.logo-texto {
+    color: var(--branco);
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.menu a {
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    transition: color 0.2s ease;
+}
+
+.menu a:hover {
+    color: var(--amarelo);
+}
+
+
+/* ==========================================
+   5. SEÇÃO INICIAL / HERO
+   ========================================== */
+
+.hero {
+    background: linear-gradient(
+        120deg,
+        var(--azul-escuro) 0%,
+        var(--azul) 65%,
+        #2768CA 100%
+    );
+
+    position: relative;
+    overflow: hidden;
+
+    padding: 105px 0 115px;
+}
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+    width: 360px;
+    height: 360px;
+
+    right: -120px;
+    top: -160px;
+
+    background-color: rgba(255, 212, 71, 0.12);
+    border-radius: 50%;
+}
+
+.hero::after {
+    content: "";
+
+    position: absolute;
+    width: 180px;
+    height: 180px;
+
+    right: 14%;
+    bottom: -110px;
+
+    border: 30px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+}
+
+.hero-conteudo {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+}
+
+.hero-texto {
+    max-width: 760px;
+}
+
+.etiqueta {
+    display: inline-block;
+
+    padding: 8px 15px;
+    margin-bottom: 25px;
+
+    border-radius: 30px;
+
+    background: rgba(255, 212, 71, 0.16);
+    color: var(--amarelo);
+
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+}
+
+.hero h1 {
+    color: var(--branco);
+
+    font-size: clamp(2.5rem, 5vw, 4.2rem);
+    font-weight: 800;
+
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    color: var(--amarelo);
+}
+
+.hero p {
+    max-width: 650px;
+
+    color: #E5EDFF;
+    font-size: 1.13rem;
+    line-height: 1.8;
+
+    margin-bottom: 32px;
+}
+
+
+/* ==========================================
+   6. FILTROS E PESQUISA
+   ========================================== */
+
+.secao-filtros {
+    padding: 0 0 50px;
+    position: relative;
+    z-index: 2;
+}
+
+.painel-filtros {
+    background-color: var(--branco);
+
+    padding: 35px;
+    margin-top: -55px;
+
+    border: 1px solid var(--borda);
+    border-radius: var(--raio-grande);
+
+    box-shadow: var(--sombra);
+}
+
+.painel-filtros h2 {
+    font-size: 1.55rem;
+    margin-bottom: 5px;
+}
+
+.painel-filtros > p {
+    margin-bottom: 25px;
+}
+
+.form-filtros {
+    display: grid;
+
+    grid-template-columns:
+        minmax(180px, 2fr)
+        minmax(130px, 1fr)
+        minmax(130px, 1fr)
+        minmax(130px, 1fr);
+
+    gap: 15px;
+    align-items: end;
+}
+
+.campo-filtro {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    min-width: 0;
+}
+
+.campo-filtro label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--azul-escuro);
+}
+
+.campo-filtro input,
+.campo-filtro select {
+    width: 100%;
+    min-width: 0;
+    height: 48px;
+
+    padding: 0 13px;
+
+    background-color: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+
+    color: var(--texto);
+}
+
+.campo-filtro input:focus,
+.campo-filtro select:focus {
+    border-color: var(--azul);
+    outline: 2px solid var(--azul-claro);
+}
+
+.form-filtros > .botao {
+    min-height: 48px;
+}
+
+
+/* ==========================================
+   7. AGENDA DE MANIFESTAÇÕES
+   ========================================== */
+
+.secao-manifestacoes {
+    padding-top: 50px;
+    padding-bottom: 95px;
+}
+
+.secao-cabecalho {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.secao-cabecalho h2 {
+    margin-bottom: 10px;
+}
+
+.secao-cabecalho p {
+    max-width: 650px;
+}
+
+.subtitulo {
+    display: inline-block;
+
+    color: var(--vermelho);
+    font-size: 0.8rem;
+    font-weight: 800;
+
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+
+    margin-bottom: 12px;
+}
+
+.ordenacao {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    min-width: 190px;
+}
+
+.ordenacao label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--azul-escuro);
+}
+
+.ordenacao select {
+    height: 45px;
+    padding: 0 12px;
+
+    background-color: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+
+    color: var(--texto);
+}
+
+.grade-manifestacoes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.mensagem-carregamento,
+.sem-resultados {
+    grid-column: 1 / -1;
+
+    padding: 45px 20px;
+    text-align: center;
+
+    background-color: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+}
+
+
+/* ==========================================
+   8. CARTÕES DE MANIFESTAÇÕES
+   ========================================== */
+
+/*
+   Estas classes serão utilizadas pelos
+   cartões criados no arquivo main.js.
+*/
+
+.cartao-manifestacao {
+    background-color: var(--branco);
+
+    border: 1px solid var(--borda);
+    border-radius: var(--raio-grande);
+
+    overflow: hidden;
+
+    box-shadow: var(--sombra);
+
+    display: flex;
+    flex-direction: column;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.cartao-manifestacao:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-hover);
+}
+
+.cartao-topo {
+    background-color: var(--azul-claro);
+
+    padding: 18px 22px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 12px;
+
+    border-bottom: 3px solid var(--amarelo);
+}
+
+.cartao-data {
+    color: var(--azul-escuro);
+    font-size: 0.92rem;
+    font-weight: 800;
+}
+
+.cartao-status {
+    display: inline-block;
+
+    background-color: var(--amarelo);
+    color: var(--azul-escuro);
+
+    padding: 5px 10px;
+    border-radius: 30px;
+
+    font-size: 0.72rem;
+    font-weight: 800;
+}
+
+.cartao-conteudo {
+    padding: 24px;
+
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.cartao-cidade {
+    color: var(--vermelho);
+
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+
+    margin-bottom: 10px;
+}
+
+.cartao-titulo {
+    font-size: 1.3rem;
+    color: var(--azul-escuro);
+
+    margin-bottom: 15px;
+}
+
+.cartao-descricao {
+    font-size: 0.92rem;
+    line-height: 1.7;
+
+    margin-bottom: 20px;
+}
+
+.cartao-informacoes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    margin-top: auto;
+    padding-top: 16px;
+
+    border-top: 1px solid var(--borda);
+}
+
+.cartao-informacoes p {
+    font-size: 0.88rem;
+    overflow-wrap: anywhere;
+}
+
+.cartao-informacoes strong {
+    color: var(--azul-escuro);
+}
+
+.cartao-rodape {
+    padding: 0 24px 24px;
+}
+
+.cartao-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    color: var(--azul);
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+.cartao-link:hover {
+    color: var(--vermelho);
+}
+
+
+/* ==========================================
+   9. MAPA INTERATIVO
+   ========================================== */
+
+.secao-mapa {
+    background-color: var(--branco);
+}
+
+.mapa-container {
+    width: 100%;
+    height: 500px;
+
+    border: 2px solid var(--borda);
+    border-radius: var(--raio-grande);
+
+    box-shadow: var(--sombra);
+    overflow: hidden;
+
+    background-color: var(--azul-claro);
+}
+
+/* Mantém os elementos do Leaflet funcionais */
+
+.leaflet-container {
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: 1;
+}
+
+.leaflet-popup-content {
+    line-height: 1.6;
+}
+
+.leaflet-popup-content strong {
+    color: var(--azul-escuro);
+}
+
+
+/* ==========================================
+   10. DIVULGAR MANIFESTAÇÃO
+   ========================================== */
+
+.secao-divulgar {
+    background-color: var(--amarelo);
+    text-align: center;
+}
+
+.divulgar-conteudo {
+    max-width: 780px;
+    margin: 0 auto;
+}
+
+.divulgar-conteudo h2 {
+    color: var(--azul-escuro);
+    font-size: 2.2rem;
+
+    margin-bottom: 20px;
+}
+
+.divulgar-conteudo p {
+    color: #374151;
+    font-size: 1.05rem;
+
+    margin-bottom: 30px;
+}
+
+/* Na seção amarela, o botão será azul */
+
+.secao-divulgar .botao-primario {
+    background-color: var(--azul);
+    color: var(--branco);
+}
+
+.secao-divulgar .botao-primario:hover {
+    background-color: var(--azul-escuro);
+}
+
+
+/* ==========================================
+   11. SOBRE O PROJETO
+   ========================================== */
+
+.secao-sobre {
+    background-color: var(--fundo);
+}
+
+.secao-sobre .container {
+    max-width: 900px;
+}
+
+.secao-sobre h2 {
+    margin-bottom: 25px;
+}
+
+.secao-sobre p {
+    margin-bottom: 20px;
+    font-size: 1.02rem;
+    line-height: 1.9;
+}
+
+.aviso {
+    margin-top: 25px;
+    padding: 18px 22px;
+
+    border-left: 4px solid var(--vermelho);
+    border-radius: 0 9px 9px 0;
+
+    background-color: var(--branco);
+
+    color: var(--texto) !important;
+}
+
+
+/* ==========================================
+   12. RODAPÉ
+   ========================================== */
+
+.rodape {
+    background-color: var(--azul-escuro);
+    color: var(--branco);
+
+    padding-top: 55px;
+}
+
+.rodape-conteudo {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+
+    gap: 35px;
+    padding-bottom: 45px;
+}
+
+.rodape-info h3 {
+    color: var(--amarelo);
+    font-size: 1.7rem;
+
+    margin-bottom: 12px;
+}
+
+.rodape-info p {
+    color: #D1DBEF;
+}
+
+.rodape-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.rodape-links a {
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    transition: color 0.2s ease;
+}
+
+.rodape-links a:hover {
+    color: var(--amarelo);
+}
+
+.rodape-final {
+    padding: 18px 20px;
+    text-align: center;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.rodape-final p {
+    color: #D1DBEF;
+    font-size: 0.85rem;
+}
+
+
+/* ==========================================
+   13. AJUSTES DE ACESSIBILIDADE
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}

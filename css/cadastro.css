@@ -1,0 +1,625 @@
+
+/* ==========================================
+   NA RUA - FORMULÁRIO DE CADASTRO
+   Arquivo: css/cadastro.css
+
+   Branco, azul, amarelo e vermelho
+   ========================================== */
+
+
+/* ==========================================
+   1. APRESENTAÇÃO DA PÁGINA
+   ========================================== */
+
+.cad-hero {
+    padding: 70px 0 85px;
+
+    background: linear-gradient(
+        125deg,
+        var(--azul-escuro, #102E65),
+        var(--azul, #1646A0)
+    );
+
+    color: var(--branco, #FFFFFF);
+}
+
+.cad-hero h1 {
+    margin: 18px 0 15px;
+    max-width: 800px;
+
+    font-size: clamp(2.1rem, 4.5vw, 3.5rem);
+    color: var(--branco, #FFFFFF);
+}
+
+.cad-hero p {
+    max-width: 720px;
+
+    color: #EAF2FF;
+    font-size: 1.08rem;
+
+    margin-bottom: 12px;
+}
+
+.cad-selo {
+    display: inline-block;
+
+    padding: 7px 13px;
+
+    border-radius: 999px;
+
+    background: rgba(255, 212, 71, 0.16);
+    color: var(--amarelo, #FFD447);
+
+    font-size: 0.78rem;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+}
+
+
+/* ==========================================
+   2. ESTRUTURA DO FORMULÁRIO
+   ========================================== */
+
+.cad-area {
+    padding: 55px 0 95px;
+    background: var(--fundo, #F5F7FC);
+}
+
+.cad-layout {
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) 300px;
+
+    align-items: start;
+    gap: 26px;
+}
+
+.cad-formulario {
+    display: flex;
+    flex-direction: column;
+
+    gap: 24px;
+    min-width: 0;
+}
+
+
+/* ==========================================
+   3. CARTÕES DO FORMULÁRIO
+   ========================================== */
+
+.cad-card,
+.cad-lateral-card {
+    background: var(--branco, #FFFFFF);
+
+    border: 1px solid var(--borda, #E0E6F0);
+    border-radius: var(--raio-grande, 20px);
+
+    box-shadow: var(
+        --sombra,
+        0 6px 24px rgba(16, 46, 101, 0.08)
+    );
+}
+
+.cad-card {
+    padding: 30px;
+}
+
+.cad-card-topo {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 15px;
+
+    padding-bottom: 22px;
+    margin-bottom: 25px;
+
+    border-bottom: 1px solid var(--borda, #E0E6F0);
+}
+
+.cad-card-topo h2 {
+    font-size: 1.45rem;
+    margin-bottom: 6px;
+}
+
+.cad-card-topo p {
+    font-size: 0.92rem;
+}
+
+
+/* NUMERAÇÃO DAS ETAPAS */
+
+.cad-passo {
+    flex: 0 0 43px;
+
+    display: grid;
+    place-items: center;
+
+    height: 43px;
+
+    background: var(--amarelo, #FFD447);
+    color: var(--azul-escuro, #102E65);
+
+    border-radius: 12px;
+
+    font-weight: 800;
+}
+
+
+/* ==========================================
+   4. CAMPOS DO FORMULÁRIO
+   ========================================== */
+
+.cad-grid {
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr);
+
+    gap: 21px;
+}
+
+.cad-grid-2 {
+    grid-template-columns: repeat(
+        2,
+        minmax(0, 1fr)
+    );
+}
+
+.cad-largura-total {
+    grid-column: 1 / -1;
+}
+
+.cad-campo {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+    gap: 8px;
+}
+
+.cad-campo label {
+    color: var(--azul-escuro, #102E65);
+
+    font-size: 0.93rem;
+    font-weight: 700;
+}
+
+
+/* INDICADORES */
+
+.cad-obrigatorio {
+    color: var(--vermelho, #E63946);
+    font-weight: 800;
+}
+
+.cad-opcional {
+    color: var(--texto-secundario, #657187);
+
+    font-size: 0.78rem;
+    font-weight: 400;
+}
+
+
+/* INPUTS, SELECTS E TEXTAREAS */
+
+.cad-campo input,
+.cad-campo select,
+.cad-campo textarea {
+    display: block;
+
+    width: 100%;
+    min-width: 0;
+
+    padding: 12px 14px;
+
+    border: 1px solid #C9D3E2;
+    border-radius: 9px;
+
+    background: var(--branco, #FFFFFF);
+    color: var(--texto, #202B40);
+
+    font-family: inherit;
+    font-size: 1rem;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.cad-campo input,
+.cad-campo select {
+    min-height: 49px;
+}
+
+.cad-campo textarea {
+    min-height: 96px;
+
+    resize: vertical;
+    line-height: 1.6;
+}
+
+
+/* FOCO DOS CAMPOS */
+
+.cad-campo input:focus,
+.cad-campo select:focus,
+.cad-campo textarea:focus {
+    outline: none;
+
+    border-color: var(--azul, #1646A0);
+
+    box-shadow:
+        0 0 0 3px rgba(22, 70, 160, 0.13);
+}
+
+
+/* PLACEHOLDERS */
+
+.cad-campo input::placeholder,
+.cad-campo textarea::placeholder {
+    color: #7A879A;
+}
+
+
+/* TEXTOS AUXILIARES */
+
+.cad-campo small {
+    color: var(--texto-secundario, #657187);
+
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+
+/* ==========================================
+   5. DADOS PRIVADOS
+   ========================================== */
+
+.cad-privado {
+    margin-top: 24px;
+    padding: 23px;
+
+    background: #F6F9FE;
+
+    border: 1px solid #DAE4F2;
+    border-left: 4px solid var(--vermelho, #E63946);
+
+    border-radius: 10px;
+}
+
+.cad-privado-cabecalho {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    color: var(--azul-escuro, #102E65);
+
+    margin-bottom: 20px;
+
+    font-size: 0.96rem;
+}
+
+.cad-privado-nota {
+    margin-top: 16px;
+
+    font-size: 0.82rem;
+    line-height: 1.6;
+}
+
+
+/* ==========================================
+   6. DECLARAÇÕES
+   ========================================== */
+
+.cad-declaracoes {
+    display: grid;
+
+    gap: 14px;
+
+    padding-top: 24px;
+    margin-top: 25px;
+
+    border-top: 1px solid var(--borda, #E0E6F0);
+}
+
+.cad-checkbox {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 12px;
+
+    font-size: 0.91rem;
+    line-height: 1.6;
+
+    cursor: pointer;
+}
+
+.cad-checkbox input {
+    flex: 0 0 auto;
+
+    width: 19px;
+    height: 19px;
+
+    margin-top: 4px;
+
+    accent-color: var(--azul, #1646A0);
+}
+
+.cad-checkbox strong {
+    color: var(--vermelho, #E63946);
+}
+
+
+/* ==========================================
+   7. FINALIZAÇÃO DO CADASTRO
+   ========================================== */
+
+.cad-finalizacao {
+    display: flex;
+    flex-direction: column;
+
+    gap: 13px;
+
+    padding: 25px 30px;
+
+    background: #FFF9E8;
+
+    border: 1px solid #F1D985;
+    border-radius: var(--raio-grande, 20px);
+}
+
+.cad-modo-teste {
+    color: #715413;
+
+    font-weight: 700;
+    font-size: 0.94rem;
+}
+
+.cad-botao-enviar {
+    align-self: flex-start;
+
+    background: var(--azul, #1646A0);
+    color: var(--branco, #FFFFFF);
+}
+
+.cad-botao-enviar:not(:disabled):hover {
+    background: var(--azul-escuro, #102E65);
+}
+
+
+/* BOTÃO DESATIVADO */
+
+.cad-botao-enviar:disabled {
+    background: #8291AD;
+    color: #FFFFFF;
+
+    cursor: not-allowed;
+
+    transform: none;
+    box-shadow: none;
+}
+
+.cad-texto-final {
+    font-size: 0.84rem;
+    line-height: 1.6;
+}
+
+
+/* ==========================================
+   8. BARRA LATERAL
+   ========================================== */
+
+.cad-lateral {
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+
+    position: sticky;
+    top: 102px;
+}
+
+.cad-lateral-card {
+    padding: 23px;
+}
+
+.cad-lateral-card h2 {
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+}
+
+
+/* LISTA DE ETAPAS */
+
+.cad-passos-lista {
+    padding-left: 22px;
+
+    display: grid;
+    gap: 13px;
+
+    color: var(--texto, #202B40);
+
+    font-size: 0.92rem;
+}
+
+.cad-passos-lista li::marker {
+    color: var(--azul, #1646A0);
+    font-weight: 800;
+}
+
+
+/* DESTAQUE DE PRIVACIDADE */
+
+.cad-lateral-destaque {
+    border-top: 4px solid var(--amarelo, #FFD447);
+}
+
+.cad-lateral-destaque p {
+    line-height: 1.7;
+    font-size: 0.88rem;
+
+    margin-bottom: 10px;
+}
+
+
+/* LINK PARA VOLTAR */
+
+.cad-link-voltar {
+    color: var(--azul, #1646A0);
+
+    font-weight: 700;
+    font-size: 0.91rem;
+}
+
+.cad-link-voltar:hover {
+    color: var(--vermelho, #E63946);
+}
+
+
+/* ==========================================
+   9. RESPONSIVIDADE - NOTEBOOKS
+   ========================================== */
+
+@media screen and (max-width: 1050px) {
+
+    .cad-layout {
+        grid-template-columns:
+            minmax(0, 1fr) 250px;
+    }
+
+}
+
+
+/* ==========================================
+   10. RESPONSIVIDADE - TABLETS
+   ========================================== */
+
+@media screen and (max-width: 850px) {
+
+    .cad-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .cad-lateral {
+        position: static;
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .cad-link-voltar {
+        grid-column: 1 / -1;
+    }
+
+}
+
+
+/* ==========================================
+   11. RESPONSIVIDADE - CELULARES
+   ========================================== */
+
+@media screen and (max-width: 600px) {
+
+    .cad-hero {
+        padding: 55px 0 65px;
+    }
+
+    .cad-hero h1 {
+        font-size: 2.05rem;
+    }
+
+    .cad-hero p {
+        font-size: 0.97rem;
+    }
+
+
+    /* ÁREA PRINCIPAL */
+
+    .cad-area {
+        padding: 30px 0 70px;
+    }
+
+
+    /* CARTÕES */
+
+    .cad-card {
+        padding: 20px;
+    }
+
+    .cad-card-topo {
+        gap: 11px;
+    }
+
+    .cad-card-topo h2 {
+        font-size: 1.22rem;
+    }
+
+    .cad-passo {
+        flex-basis: 35px;
+
+        height: 35px;
+
+        font-size: 0.86rem;
+    }
+
+
+    /* CAMPOS */
+
+    .cad-grid-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .cad-campo input,
+    .cad-campo select,
+    .cad-campo textarea {
+        font-size: 16px;
+    }
+
+
+    /* ÁREA PRIVADA */
+
+    .cad-privado {
+        padding: 17px;
+    }
+
+
+    /* FINALIZAÇÃO */
+
+    .cad-finalizacao {
+        padding: 20px;
+    }
+
+    .cad-botao-enviar {
+        width: 100%;
+    }
+
+
+    /* BARRA LATERAL */
+
+    .cad-lateral {
+        grid-template-columns: 1fr;
+    }
+
+    .cad-link-voltar {
+        grid-column: auto;
+    }
+
+}
+
+
+/* ==========================================
+   12. ACESSIBILIDADE
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .cad-campo input,
+    .cad-campo select,
+    .cad-campo textarea {
+        transition: none;
+    }
+
+}
