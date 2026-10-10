@@ -3,29 +3,23 @@
    NA RUA - PAINEL ADMINISTRATIVO
    Arquivo: js/admin.js
 
-   Apos aprovacao:
-   1. Publica a manifestacao no Supabase.
-   2. Simula a geocodificacao.
+   Fluxo de aprovacao:
+   1. Aprova e publica pelo RPC do Supabase.
+   2. Simula a geocodificacao no servidor.
    3. Confere a correspondencia do local.
-   4. Salva somente referencias compativeis.
-   5. Mantem locais incertos sem coordenadas.
+   4. Reenvia o resultado como "esperado" para salvar.
+   5. O servidor revalida antes de gravar.
 
-   A validacao definitiva deve permanecer
-   na Edge Function do Supabase.
+   A Edge Function continua responsavel pela seguranca.
    ============================================================ */
 
 (() => {
     "use strict";
 
     const cliente = window.naRuaSupabase;
+    const porId = (id) => document.getElementById(id);
 
-    const porId = (id) =>
-        document.getElementById(id);
-
-    /* ========================================================
-       1. ELEMENTOS DO HTML
-       ======================================================== */
-
+    // 1. Elementos existentes no admin.html.
     const telas = {
         carregamento: porId("admin-carregamento"),
         login: porId("admin-login"),
@@ -58,10 +52,7 @@
     let operacaoEmAndamento = false;
     let versaoConsulta = 0;
 
-    /* ========================================================
-       2. FUNCOES DA INTERFACE
-       ======================================================== */
-
+    // 2. Interface.
     function mostrarAviso(texto) {
         aviso.textContent = texto;
     }
@@ -74,14 +65,9 @@
 
     function limparDetalhes() {
         solicitacaoSelecionada = null;
-
         detalheCampos.replaceChildren();
-
-        detalheTitulo.textContent =
-            "Detalhes da solicitação";
-
+        detalheTitulo.textContent = "Detalhes da solicitação";
         mensagemAcao.textContent = "";
-
         acoes.hidden = true;
         botaoAprovar.disabled = true;
         botaoRejeitar.disabled = true;
@@ -89,19 +75,14 @@
     }
 
     function mostrarTela(nome) {
-        for (
-            const [chave, elemento]
-            of Object.entries(telas)
-        ) {
+        for (const [chave, elemento] of Object.entries(telas)) {
             elemento.hidden = chave !== nome;
         }
 
         if (nome !== "painel") {
             ++versaoConsulta;
-
             lista.replaceChildren();
             limparDetalhes();
-
             total.textContent = "0";
             emailUsuario.textContent = "";
             aviso.textContent = "";
@@ -110,8 +91,7 @@
 
     function ajustarBotoes() {
         const pendente =
-            solicitacaoSelecionada?.status ===
-            "pendente";
+            solicitacaoSelecionada?.status === "pendente";
 
         acoes.hidden = !pendente;
 
@@ -131,30 +111,22 @@
             operacaoEmAndamento;
     }
 
-    /* ========================================================
-       3. VERIFICAR ADMINISTRADOR
-       ======================================================== */
-
+    // 3. Autenticacao e permissao administrativa.
     async function verificarAdministrador() {
-        const {
-            data,
-            error
-        } = await cliente.auth.getUser();
+        const { data, error } = await cliente.auth.getUser();
 
         if (error || !data?.user) {
             mostrarTela("login");
             return;
         }
 
-        const usuario = data.user;
-
         const {
-            data: administrador,
+            data: admin,
             error: erroPermissao
         } = await cliente
             .from("administradores")
             .select("user_id")
-            .eq("user_id", usuario.id)
+            .eq("user_id", data.user.id)
             .maybeSingle();
 
         if (erroPermissao) {
@@ -164,30 +136,25 @@
             );
         }
 
-        if (!administrador) {
+        if (!admin) {
             await cliente.auth.signOut();
-
             mostrarTela("login");
 
             mensagemLogin.textContent =
-                "Esta conta não possui " +
-                "acesso administrativo.";
+                "Esta conta não possui acesso administrativo.";
 
             return;
         }
 
         emailUsuario.textContent =
-            usuario.email || "Administrador";
+            data.user.email || "Administrador";
 
         mostrarTela("painel");
 
         await carregarSolicitacoes();
     }
 
-    /* ========================================================
-       4. FORMATACAO E LISTAGEM
-       ======================================================== */
-
+    // 4. Lista e detalhes.
     function formatarData(valor) {
         if (
             typeof valor !== "string" ||
@@ -221,13 +188,11 @@
             ),
 
             criarParagrafo(
-                "Data: " +
-                formatarData(solicitacao.data)
+                "Data: " + formatarData(solicitacao.data)
             ),
 
             criarParagrafo(
-                "Situação: " +
-                solicitacao.status
+                "Situação: " + solicitacao.status
             )
         );
 
@@ -256,124 +221,76 @@
         detalheCampos.append(dt, dd);
     }
 
-    /* ========================================================
-       5. DETALHES DA SOLICITACAO
-       ======================================================== */
-
-    function mostrarDetalhes(solicitacao) {
+    function mostrarDetalhes(s) {
         limparDetalhes();
 
-        solicitacaoSelecionada = solicitacao;
+        solicitacaoSelecionada = s;
 
         detalheTitulo.textContent =
-            solicitacao.titulo || "Sem título";
+            s.titulo || "Sem título";
 
-        adicionarDetalhe(
-            "Protocolo",
-            solicitacao.id
-        );
-
-        adicionarDetalhe(
-            "Status",
-            solicitacao.status
-        );
-
-        adicionarDetalhe(
-            "Categoria",
-            solicitacao.categoria
-        );
-
-        adicionarDetalhe(
-            "Descrição",
-            solicitacao.descricao
-        );
-
-        adicionarDetalhe(
-            "Data",
-            formatarData(solicitacao.data)
-        );
+        adicionarDetalhe("Protocolo", s.id);
+        adicionarDetalhe("Status", s.status);
+        adicionarDetalhe("Categoria", s.categoria);
+        adicionarDetalhe("Descrição", s.descricao);
+        adicionarDetalhe("Data", formatarData(s.data));
 
         adicionarDetalhe(
             "Horário",
-            solicitacao.horario?.slice(0, 5)
+            s.horario?.slice(0, 5)
         );
 
-        adicionarDetalhe(
-            "Estado",
-            solicitacao.estado
-        );
-
-        adicionarDetalhe(
-            "Cidade",
-            solicitacao.cidade
-        );
+        adicionarDetalhe("Estado", s.estado);
+        adicionarDetalhe("Cidade", s.cidade);
 
         adicionarDetalhe(
             "Local de concentração",
-            solicitacao.local
+            s.local
         );
 
-        adicionarDetalhe(
-            "Referência",
-            solicitacao.referencia
-        );
+        adicionarDetalhe("Referência", s.referencia);
+        adicionarDetalhe("Trajeto", s.trajeto);
+        adicionarDetalhe("Organização", s.organizador);
 
-        adicionarDetalhe(
-            "Trajeto",
-            solicitacao.trajeto
-        );
-
-        adicionarDetalhe(
-            "Organização",
-            solicitacao.organizador
-        );
-
-        // Dados privados: somente no painel admin.
-        // Nunca enviar esses campos para a agenda.
-
+        // Campos privados: exibir somente no painel.
         adicionarDetalhe(
             "Nome do responsável (privado)",
-            solicitacao.representante_nome
+            s.representante_nome
         );
 
         adicionarDetalhe(
             "E-mail do responsável (privado)",
-            solicitacao.representante_email
+            s.representante_email
         );
 
         adicionarDetalhe(
             "Telefone do responsável (privado)",
-            solicitacao.representante_telefone
+            s.representante_telefone
         );
 
         adicionarDetalhe(
             "Função do responsável (privado)",
-            solicitacao.representante_funcao
+            s.representante_funcao
         );
 
         adicionarDetalhe(
             "Fonte de divulgação",
-            solicitacao.fonte
+            s.fonte
         );
 
         adicionarDetalhe(
             "Link do cartaz",
-            solicitacao.cartaz_url
+            s.cartaz_url
         );
 
         adicionarDetalhe(
             "Observações administrativas",
-            solicitacao.observacoes
+            s.observacoes
         );
 
         painelDetalhes.hidden = false;
-
         ajustarBotoes();
     }
-
-    /* ========================================================
-       6. CARREGAR SOLICITACOES
-       ======================================================== */
 
     async function carregarSolicitacoes() {
         if (operacaoEmAndamento) {
@@ -381,20 +298,15 @@
         }
 
         const consultaAtual = ++versaoConsulta;
-
         const status = filtroStatus.value;
 
         mostrarAviso("Carregando solicitações...");
 
         lista.replaceChildren();
         limparDetalhes();
-
         total.textContent = "0";
 
-        const {
-            data,
-            error
-        } = await cliente
+        const { data, error } = await cliente
             .from("solicitacoes")
             .select(
                 "id,titulo,categoria,descricao,data," +
@@ -465,17 +377,12 @@
         lista.appendChild(fragmento);
 
         mostrarAviso(
-            `${registros.length} ` +
-            `solicitação(ões) carregada(s).`
+            `${registros.length} solicitação(ões) carregada(s).`
         );
     }
 
-    /* ========================================================
-       7. VERIFICACAO CONSERVADORA DO ENDERECO
-
-       Evitar equivalencias incorretas como:
-       Centro da UFRN -> Praca Civica da UFRN
-       ======================================================== */
+    // 5. Validacao complementar de nomes no navegador.
+    // O servidor faz a validacao obrigatoria antes de gravar.
 
     function normalizarNome(valor) {
         return String(valor ?? "")
@@ -483,36 +390,40 @@
             .replace(/[\u0300-\u036f]/g, "")
             .toLowerCase()
             .replace(/[^a-z0-9 ]/g, " ")
-            .replace(
-                /\b(de|da|do|das|dos)\b/g,
-                " "
-            )
+            .replace(/\b(de|da|do|das|dos)\b/g, " ")
             .replace(/\s+/g, " ")
             .trim();
     }
 
     function referenciaInformada(local) {
-        return String(local ?? "")
-            .split(/[,;]/)[0]
-            .replace(
-                /^\s*em frente\s+(?:ao|a|à|do|da)\s+/i,
-                ""
-            )
-            .trim();
+        const texto = String(local ?? "");
+
+        // Pode estar no inicio ou depois de uma avenida:
+        // "Avenida Paulista, em frente ao MASP" -> "MASP".
+
+        const frente = texto.match(
+            /em frente\s+(?:ao|a|à|do|da)\s+([^,;]+)/i
+        );
+
+        return (
+            frente
+                ? frente[1]
+                : texto.split(/[,;]/)[0]
+        ).trim();
     }
 
     function correspondenciaConservadora(
         solicitacao,
-        geo
+        resposta
     ) {
         if (
-            geo?.ok !== true ||
-            geo.resultado?.status !== "localizado"
+            resposta?.ok !== true ||
+            resposta.resultado?.status !== "localizado"
         ) {
             return false;
         }
 
-        const resultado = geo.resultado;
+        const resultado = resposta.resultado;
 
         if (
             !Number.isFinite(resultado.latitude) ||
@@ -522,11 +433,11 @@
             return false;
         }
 
-        const local =
+        const referencia =
             referenciaInformada(solicitacao.local);
 
         const esperado =
-            normalizarNome(local);
+            normalizarNome(referencia);
 
         const endereco =
             String(resultado.endereco);
@@ -539,18 +450,15 @@
         const enderecoNormalizado =
             normalizarNome(endereco);
 
-        // Impedir anexos nao solicitados.
-
+        // Nao usar anexo quando ele nao foi solicitado.
         if (
-            !/\banexo\b/i.test(local) &&
+            !/\banexo\b/i.test(referencia) &&
             /\banexo\b/i.test(endereco)
         ) {
             return false;
         }
 
-        // Regra especifica do MASP principal.
-        // Ja validada nos testes anteriores.
-
+        // MASP: referencia principal da Av. Paulista, 1578.
         if (
             esperado === "masp" &&
             normalizarNome(solicitacao.cidade) ===
@@ -560,72 +468,61 @@
         ) {
             return (
                 resultado.origem === "places" &&
-                enderecoNormalizado.includes(
-                    "museu arte sao paulo"
-                ) &&
+                encontrado === "museu arte sao paulo" &&
                 enderecoNormalizado.includes(
                     "avenida paulista 1578"
                 )
             );
         }
 
-        // Outros locais:
-        // exigir correspondencia do nome principal.
-        //
-        // Exemplo:
-        // Largo Sao Sebastiao
-        // Largo de Sao Sebastiao
-        //
-        // Ambos viram:
-        // largo sao sebastiao
+        // Alias para o museu principal em Brasilia.
+        if (
+            esperado === "museu republica" &&
+            normalizarNome(solicitacao.cidade) ===
+                "brasilia" &&
+            String(solicitacao.estado).toUpperCase() ===
+                "DF" &&
+            encontrado === "museu nacional republica"
+        ) {
+            return true;
+        }
 
+        // Exigir equivalencia do nome principal,
+        // nao nomes apenas relacionados.
         return (
             esperado.length >= 5 &&
             esperado === encontrado
         );
     }
 
-    /* ========================================================
-       8. TRATAR ERROS DA EDGE FUNCTION
-       ======================================================== */
-
-    async function mensagemErroFuncao(error) {
+    async function mensagemErroFuncao(erro) {
         let detalhe =
-            error?.message || "Falha desconhecida.";
+            erro?.message || "Falha desconhecida.";
 
         try {
             if (
-                error?.context &&
-                typeof error.context.text === "function"
+                typeof erro?.context?.text === "function"
             ) {
                 const resposta =
-                    await error.context.text();
+                    await erro.context.text();
 
                 if (resposta) {
                     detalhe = resposta.slice(0, 500);
                 }
             }
         } catch {
-            // Mantem mensagem generica.
+            // Manter mensagem inicial.
         }
 
         return detalhe;
     }
 
-    /* ========================================================
-       9. GEOCODIFICACAO APOS APROVACAO
-
-       Etapa 1: simular.
-       Etapa 2: verificar correspondencia.
-       Etapa 3: salvar se a referencia for compativel.
-       ======================================================== */
-
+    // 6. Geocodificacao apos a aprovacao.
     async function geocodificarPublicacao(
         idPublicacao,
         solicitacao
     ) {
-        // PRIMEIRA CONSULTA: SIMULAR
-
+        // Primeira chamada: nao grava.
         const {
             data: simulacao,
             error: erroSimular
@@ -640,12 +537,9 @@
         );
 
         if (erroSimular) {
-            const motivo =
-                await mensagemErroFuncao(erroSimular);
-
             console.warn(
-                "Geocodificação não concluída:",
-                motivo
+                "Falha ao simular:",
+                await mensagemErroFuncao(erroSimular)
             );
 
             return (
@@ -656,7 +550,7 @@
 
         if (
             simulacao?.resultado?.status !==
-            "localizado"
+                "localizado"
         ) {
             return (
                 "Endereço não confirmado " +
@@ -664,24 +558,15 @@
             );
         }
 
-        // VALIDAR SE O RESULTADO CORRESPONDE
-        // AO LOCAL INFORMADO NA SOLICITACAO.
-
-        const corresponde =
-            correspondenciaConservadora(
+        if (
+            !correspondenciaConservadora(
                 solicitacao,
                 simulacao
-            );
-
-        if (!corresponde) {
+            )
+        ) {
             console.info(
-                "Local relacionado, mas sem " +
-                "correspondência exata:",
-                {
-                    informado: solicitacao.local,
-                    encontrado:
-                        simulacao?.resultado?.endereco
-                }
+                "Referência encontrada, mas não " +
+                "equivalente ao local informado."
             );
 
             return (
@@ -691,7 +576,10 @@
             );
         }
 
-        // SEGUNDA CONSULTA: SALVAR
+        // Segunda chamada:
+        // reenvia a decisao simulada para o servidor.
+        // O servidor recusa caso origem, endereco
+        // ou coordenadas mudem.
 
         const {
             data: gravacao,
@@ -701,23 +589,23 @@
             {
                 body: {
                     id: idPublicacao,
-                    modo: "salvar"
+                    modo: "salvar",
+
+                    // CAMPO NOVO:
+                    esperado: simulacao.resultado
                 }
             }
         );
 
         if (erroSalvar) {
-            const motivo =
-                await mensagemErroFuncao(erroSalvar);
-
             console.warn(
-                "Falha ao gravar coordenadas:",
-                motivo
+                "Falha ao gravar:",
+                await mensagemErroFuncao(erroSalvar)
             );
 
             return (
-                "Publicação realizada, mas " +
-                "a localização não foi gravada."
+                "Localização não gravada; revise o " +
+                "resultado antes de tentar novamente."
             );
         }
 
@@ -725,11 +613,7 @@
             gravacao?.ok === true &&
             gravacao?.gravado === true &&
             gravacao?.resultado?.status ===
-                "localizado" &&
-            correspondenciaConservadora(
-                solicitacao,
-                gravacao
-            )
+                "localizado"
         ) {
             return (
                 "Coordenadas confirmadas e " +
@@ -737,37 +621,24 @@
             );
         }
 
-        console.warn(
-            "Gravação sem confirmação de " +
-            "equivalência após a consulta:",
-            gravacao
-        );
-
         return (
-            "Localização gravada, mas " +
-            "requer revisão administrativa."
+            "Não foi possível confirmar a " +
+            "gravação das coordenadas."
         );
     }
 
-    /* ========================================================
-       10. APROVAR OU REJEITAR
-       ======================================================== */
-
+    // 7. Aprovacao e rejeicao.
     async function executarAcao(tipo) {
         if (
             operacaoEmAndamento ||
             !solicitacaoSelecionada ||
-            solicitacaoSelecionada.status !==
-                "pendente"
+            solicitacaoSelecionada.status !== "pendente"
         ) {
             return;
         }
 
-        const selecionada =
-            solicitacaoSelecionada;
-
-        const aprovando =
-            tipo === "aprovar";
+        const selecionada = solicitacaoSelecionada;
+        const aprovando = tipo === "aprovar";
 
         const funcao = aprovando
             ? "aprovar_solicitacao"
@@ -790,7 +661,6 @@
         }
 
         operacaoEmAndamento = true;
-
         ajustarBotoes();
 
         mensagemAcao.textContent = aprovando
@@ -798,12 +668,9 @@
             : "Rejeitando solicitação...";
 
         try {
-            // EXECUTAR RPC EXISTENTE
-
-            const {
-                data,
-                error
-            } = await cliente.rpc(
+            // As RPCs existentes ja foram
+            // testadas no Supabase.
+            const { data, error } = await cliente.rpc(
                 funcao,
                 {
                     p_solicitacao_id:
@@ -815,23 +682,7 @@
                 throw new Error(error.message);
             }
 
-            if (
-                aprovando &&
-                (
-                    data === null ||
-                    data === undefined
-                )
-            ) {
-                throw new Error(
-                    "A função não retornou " +
-                    "o ID da publicação."
-                );
-            }
-
-            if (
-                !aprovando &&
-                data !== true
-            ) {
+            if (!aprovando && data !== true) {
                 throw new Error(
                     "A rejeição não foi " +
                     "confirmada pelo servidor."
@@ -848,6 +699,8 @@
                 const idPublicacao = Number(data);
 
                 if (
+                    data !== null &&
+                    data !== undefined &&
                     Number.isSafeInteger(idPublicacao) &&
                     idPublicacao > 0
                 ) {
@@ -856,18 +709,18 @@
                         `${idPublicacao} criada.`;
 
                     mensagemAcao.textContent =
-                        "Publicação concluída. " +
+                        "Publicação realizada. " +
                         "Conferindo localização...";
 
                     try {
-                        const detalheGeo =
+                        const resultadoGeo =
                             await geocodificarPublicacao(
                                 idPublicacao,
                                 selecionada
                             );
 
                         mensagemResultado +=
-                            " " + detalheGeo;
+                            " " + resultadoGeo;
 
                     } catch (erroGeo) {
                         console.warn(
@@ -876,15 +729,17 @@
                         );
 
                         mensagemResultado +=
-                            " Localização indisponível; " +
-                            "a manifestação segue publicada.";
+                            " Não foi possível consultar " +
+                            "a localização. A manifestação " +
+                            "segue publicada.";
                     }
 
                 } else {
+                    // Nao afirmar que a aprovacao
+                    // falhou se o RPC nao retornou ID.
                     mensagemResultado +=
                         " Não foi possível identificar " +
-                        "o ID da nova manifestação " +
-                        "para o mapa.";
+                        "o ID da publicação para geocodificar.";
                 }
 
             } else {
@@ -893,8 +748,9 @@
                     "rejeitada com sucesso.";
             }
 
+            // Liberar recarregamento apenas
+            // depois de terminar todas as chamadas.
             operacaoEmAndamento = false;
-
             ajustarBotoes();
 
             await carregarSolicitacoes();
@@ -926,10 +782,7 @@
         () => executarAcao("rejeitar")
     );
 
-    /* ========================================================
-       11. LOGIN
-       ======================================================== */
-
+    // 8. Login.
     formLogin.addEventListener(
         "submit",
         async (evento) => {
@@ -938,7 +791,6 @@
             if (!cliente) {
                 mensagemLogin.textContent =
                     "Supabase não configurado.";
-
                 return;
             }
 
@@ -985,10 +837,7 @@
         }
     );
 
-    /* ========================================================
-       12. LOGOUT
-       ======================================================== */
-
+    // 9. Logout.
     botaoSair.addEventListener(
         "click",
         async () => {
@@ -1012,10 +861,7 @@
         }
     );
 
-    /* ========================================================
-       13. FILTROS E ATUALIZACAO
-       ======================================================== */
-
+    // 10. Filtros.
     botaoAtualizar.addEventListener(
         "click",
         carregarSolicitacoes
@@ -1026,10 +872,7 @@
         carregarSolicitacoes
     );
 
-    /* ========================================================
-       14. MONITORAR AUTENTICACAO
-       ======================================================== */
-
+    // 11. Estado da autenticacao.
     if (cliente) {
         cliente.auth.onAuthStateChange(
             (evento) => {
@@ -1040,10 +883,7 @@
         );
     }
 
-    /* ========================================================
-       15. INICIALIZAR PAINEL
-       ======================================================== */
-
+    // 12. Inicializacao.
     async function iniciar() {
         if (!cliente) {
             mostrarTela("login");
@@ -1069,5 +909,4 @@
     }
 
     iniciar();
-
 })();
