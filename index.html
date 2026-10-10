@@ -1,0 +1,739 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Encontre manifestações e atos públicos em todo o Brasil. Consulte locais, datas, horários e informações dos eventos.">
+
+    <meta name="theme-color" content="#1646A0">
+
+    <title>Na Rua | Agenda de Manifestações</title>
+
+
+    <!-- ================================= -->
+    <!-- ESTILOS DO SITE                   -->
+    <!-- ================================= -->
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/responsivo.css">
+
+
+    <!-- ================================= -->
+    <!-- BIBLIOTECA LEAFLET - CSS          -->
+    <!-- ================================= -->
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- ================================= -->
+    <!-- CABEÇALHO                         -->
+    <!-- ================================= -->
+
+    <header class="cabecalho">
+
+        <div class="container cabecalho-conteudo">
+
+            <!-- LOGOTIPO -->
+
+            <a href="#inicio" class="logo">
+
+                <span class="logo-icone"
+                      aria-hidden="true">
+                    ✊
+                </span>
+
+                <span class="logo-texto">
+                    Na Rua
+                </span>
+
+            </a>
+
+
+            <!-- MENU PRINCIPAL -->
+
+            <nav class="menu" aria-label="Menu principal">
+
+                <a href="#inicio">
+                    Início
+                </a>
+
+                <a href="#manifestacoes">
+                    Manifestações
+                </a>
+
+                <a href="#mapa-section">
+                    Mapa
+                </a>
+
+                <a href="#sobre">
+                    Sobre
+                </a>
+
+            </nav>
+
+
+            <!-- BOTÃO DE CADASTRO -->
+
+            <a
+                href="cadastrar.html"
+                class="botao botao-destaque"
+            >
+                Divulgar manifestação
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================================= -->
+    <!-- CONTEÚDO PRINCIPAL                -->
+    <!-- ================================= -->
+
+    <main>
+
+
+        <!-- ============================= -->
+        <!-- SEÇÃO INICIAL / HERO          -->
+        <!-- ============================= -->
+
+        <section id="inicio" class="hero">
+
+            <div class="container hero-conteudo">
+
+                <div class="hero-texto">
+
+                    <span class="etiqueta">
+                        Agenda nacional de manifestações
+                    </span>
+
+
+                    <h1>
+                        Saiba o que acontece
+                        <span>
+                            nas ruas do Brasil.
+                        </span>
+                    </h1>
+
+
+                    <p>
+                        Encontre manifestações, atos públicos
+                        e mobilizações em sua cidade.
+
+                        Consulte datas, horários, locais
+                        de concentração e outras informações
+                        importantes.
+                    </p>
+
+
+                    <a
+                        href="#manifestacoes"
+                        class="botao botao-primario"
+                    >
+                        Explorar manifestações
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ============================= -->
+        <!-- BUSCA E FILTROS               -->
+        <!-- ============================= -->
+
+        <section class="secao-filtros">
+
+            <div class="container">
+
+                <div class="painel-filtros">
+
+                    <h2>
+                        Encontre uma manifestação
+                    </h2>
+
+                    <p>
+                        Pesquise por local, cidade,
+                        estado ou nome do evento.
+                    </p>
+
+
+                    <!-- FORMULÁRIO DOS FILTROS -->
+
+                    <form
+                        id="form-filtros"
+                        class="form-filtros"
+                    >
+
+
+                        <!-- PESQUISA -->
+
+                        <div class="campo-filtro">
+
+                            <label for="busca">
+                                Pesquisar
+                            </label>
+
+                            <input
+                                type="search"
+                                id="busca"
+                                name="busca"
+                                placeholder="Nome, cidade ou local"
+                            >
+
+                        </div>
+
+
+
+                        <!-- ESTADO -->
+
+                        <div class="campo-filtro">
+
+                            <label for="estado">
+                                Estado
+                            </label>
+
+                            <select
+                                id="estado"
+                                name="estado"
+                            >
+
+                                <option value="">
+                                    Todos os estados
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- CIDADE -->
+
+                        <div class="campo-filtro">
+
+                            <label for="cidade">
+                                Cidade
+                            </label>
+
+                            <select
+                                id="cidade"
+                                name="cidade"
+                            >
+
+                                <option value="">
+                                    Todas as cidades
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- DATA -->
+
+                        <div class="campo-filtro">
+
+                            <label for="data">
+                                Data
+                            </label>
+
+                            <input
+                                type="date"
+                                id="data"
+                                name="data"
+                            >
+
+                        </div>
+
+
+
+                        <!-- BOTÃO BUSCAR -->
+
+                        <button
+                            type="submit"
+                            class="botao botao-buscar"
+                        >
+                            Buscar
+                        </button>
+
+
+
+                        <!-- BOTÃO LIMPAR -->
+
+                        <button
+                            type="reset"
+                            class="botao botao-limpar"
+                        >
+                            Limpar
+                        </button>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ============================= -->
+        <!-- AGENDA DE MANIFESTAÇÕES       -->
+        <!-- ============================= -->
+
+        <section
+            id="manifestacoes"
+            class="secao-manifestacoes"
+        >
+
+            <div class="container">
+
+
+                <!-- CABEÇALHO DA AGENDA -->
+
+                <div class="secao-cabecalho">
+
+                    <div>
+
+                        <span class="subtitulo">
+                            Agenda de mobilizações
+                        </span>
+
+                        <h2>
+                            Próximas manifestações
+                        </h2>
+
+                        <p>
+                            Confira manifestações, atos públicos,
+                            assembleias e atividades estudantis
+                            divulgados em diferentes cidades
+                            do Brasil.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- ORDENAÇÃO -->
+
+                    <div class="ordenacao">
+
+                        <label for="ordenar">
+                            Ordenar por:
+                        </label>
+
+                        <select id="ordenar">
+
+                            <option value="data">
+                                Data mais próxima
+                            </option>
+
+                            <option value="cidade">
+                                Cidade
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ========================= -->
+                <!-- LISTA DE MANIFESTAÇÕES    -->
+                <!-- ========================= -->
+
+                <!--
+                    Os cartões são criados
+                    automaticamente pelo main.js.
+
+                    Os dados são carregados
+                    atualmente do arquivo:
+
+                    data/manifestacoes.json
+                -->
+
+                <div
+                    id="lista-manifestacoes"
+                    class="grade-manifestacoes"
+                    aria-live="polite"
+                >
+
+                    <p class="mensagem-carregamento">
+                        Carregando manifestações...
+                    </p>
+
+                </div>
+
+
+
+                <!-- MENSAGEM SEM RESULTADOS -->
+
+                <p
+                    id="sem-resultados"
+                    class="sem-resultados"
+                    hidden
+                >
+                    Nenhuma manifestação encontrada
+                    para os filtros selecionados.
+                </p>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ============================= -->
+        <!-- MAPA DE MANIFESTAÇÕES         -->
+        <!-- ============================= -->
+
+        <section
+            id="mapa-section"
+            class="secao-mapa"
+        >
+
+            <div class="container">
+
+
+                <div class="secao-cabecalho">
+
+                    <div>
+
+                        <span class="subtitulo">
+                            Localização dos atos
+                        </span>
+
+                        <h2>
+                            Manifestações pelo Brasil
+                        </h2>
+
+                        <p>
+                            Explore o mapa para encontrar
+                            os locais das manifestações
+                            cadastradas.
+
+                            Os marcadores representam pontos
+                            de referência. Confira os detalhes
+                            com os organizadores.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- MAPA LEAFLET -->
+
+                <div
+                    id="mapa"
+                    class="mapa-container"
+                    role="region"
+                    aria-label="Mapa com a localização das manifestações"
+                >
+                </div>
+
+
+                <!--
+                    O mapa.js adicionará abaixo do mapa
+                    um resumo dos eventos com localização
+                    conhecida ou ainda pendente.
+                -->
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ============================= -->
+        <!-- DIVULGAR MANIFESTAÇÃO         -->
+        <!-- ============================= -->
+
+        <section
+            id="divulgar"
+            class="secao-divulgar"
+        >
+
+            <div class="container">
+
+                <div class="divulgar-conteudo">
+
+                    <h2>
+                        Conhece uma manifestação que
+                        ainda não está na agenda?
+                    </h2>
+
+
+                    <p>
+                        Ajude a manter as informações
+                        atualizadas.
+
+                        Envie os dados da manifestação,
+                        local, horário, organização responsável
+                        e fontes de divulgação.
+
+                        Todas as solicitações serão
+                        analisadas antes da publicação.
+                    </p>
+
+
+                    <!-- PÁGINA DE CADASTRO -->
+
+                    <a
+                        href="cadastrar.html"
+                        class="botao botao-primario"
+                    >
+                        Cadastrar manifestação
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ============================= -->
+        <!-- SOBRE O PROJETO               -->
+        <!-- ============================= -->
+
+        <section
+            id="sobre"
+            class="secao-sobre"
+        >
+
+            <div class="container">
+
+                <h2>
+                    Sobre o projeto
+                </h2>
+
+
+                <p>
+                    O Na Rua é uma plataforma independente
+                    dedicada à divulgação de informações
+                    públicas sobre manifestações,
+                    mobilizações, assembleias e atos
+                    realizados em todo o Brasil.
+                </p>
+
+
+                <p>
+                    Nosso objetivo é facilitar o acesso
+                    às informações de local, data e horário,
+                    contribuindo para a transparência
+                    e o acesso à informação.
+                </p>
+
+
+                <p>
+                    As manifestações divulgadas na plataforma
+                    são cadastradas a partir de fontes
+                    públicas ou informações encaminhadas
+                    para análise administrativa.
+                </p>
+
+
+                <p>
+                    O cadastro de novos eventos estará
+                    disponível após a conclusão do
+                    sistema de segurança e aprovação.
+                </p>
+
+
+                <!-- AVISO IMPORTANTE -->
+
+                <p class="aviso">
+
+                    <strong>Atenção:</strong>
+
+                    Datas, horários, locais e trajetos
+                    podem sofrer alterações.
+
+                    Consulte sempre as fontes originais
+                    e as informações divulgadas
+                    pelos organizadores.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ================================= -->
+    <!-- RODAPÉ                            -->
+    <!-- ================================= -->
+
+    <footer class="rodape">
+
+        <div class="container rodape-conteudo">
+
+
+            <!-- INFORMAÇÕES -->
+
+            <div class="rodape-info">
+
+                <h3>
+                    Na Rua
+                </h3>
+
+                <p>
+                    Informação pública, acessível
+                    e organizada.
+                </p>
+
+            </div>
+
+
+
+            <!-- LINKS -->
+
+            <div class="rodape-links">
+
+                <a href="#inicio">
+                    Início
+                </a>
+
+                <a href="#manifestacoes">
+                    Agenda
+                </a>
+
+                <a href="#mapa-section">
+                    Mapa
+                </a>
+
+                <a href="#sobre">
+                    Sobre
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DIREITOS -->
+
+        <div class="rodape-final">
+
+            <p>
+                &copy;
+                <span id="ano-atual">2026</span>
+                Na Rua. Todos os direitos reservados.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- ================================= -->
+    <!-- BIBLIOTECA LEAFLET - JAVASCRIPT   -->
+    <!-- ================================= -->
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+
+
+    <!-- ================================= -->
+    <!-- BIBLIOTECA SUPABASE               -->
+    <!-- ================================= -->
+
+    <!--
+        Cliente Supabase para navegador.
+
+        Este script precisa ser carregado
+        antes do arquivo js/supabase.js.
+    -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+        defer>
+    </script>
+
+
+
+    <!-- ================================= -->
+    <!-- CONEXÃO COM SUPABASE              -->
+    <!-- ================================= -->
+
+    <!--
+        Contém a URL e a Publishable Key
+        do projeto Supabase.
+
+        Nunca utilizar Secret Key aqui.
+    -->
+
+    <script
+        src="js/supabase.js"
+        defer>
+    </script>
+
+
+
+    <!-- ================================= -->
+    <!-- SCRIPTS DO PROJETO                -->
+    <!-- ================================= -->
+
+    <!-- MAPA INTERATIVO -->
+
+    <script
+        src="js/mapa.js"
+        defer>
+    </script>
+
+
+    <!-- FILTROS DE PESQUISA -->
+
+    <script
+        src="js/filtros.js"
+        defer>
+    </script>
+
+
+    <!-- CARREGAMENTO DAS MANIFESTAÇÕES -->
+
+    <script
+        src="js/main.js"
+        defer>
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>Redefinir senha | Na Rua</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .recuperacao {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f3f6fc;
+            padding: 24px;
+        }
+
+        .recuperacao-card {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            max-width: 430px;
+            width: 100%;
+            box-shadow: 0 5px 20px #102e6515;
+        }
+
+        .recuperacao-card h1 {
+            color: #1646A0;
+            margin-bottom: 14px;
+        }
+
+        .recuperacao-card label {
+            display: block;
+            margin: 18px 0 7px;
+            font-weight: bold;
+        }
+
+        .recuperacao-card input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #b8c5dc;
+            border-radius: 8px;
+        }
+
+        .recuperacao-card button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 22px;
+            border: none;
+            border-radius: 8px;
+            background: #FFD447;
+            color: #102e65;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .recuperacao-card button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #mensagem {
+            margin-top: 18px;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="recuperacao">
+
+        <section class="recuperacao-card">
+
+            <h1>Na Rua</h1>
+
+            <h2>Redefinir senha</h2>
+
+            <p>
+                Escolha uma nova senha para
+                sua conta administrativa.
+            </p>
+
+            <form id="form-redefinir" hidden>
+
+                <label for="nova-senha">
+                    Nova senha
+                </label>
+
+                <input
+                    type="password"
+                    id="nova-senha"
+                    minlength="12"
+                    autocomplete="new-password"
+                    required
+                >
+
+                <label for="confirmar-senha">
+                    Confirmar nova senha
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmar-senha"
+                    minlength="12"
+                    autocomplete="new-password"
+                    required
+                >
+
+                <button type="submit" id="salvar-senha">
+                    Salvar nova senha
+                </button>
+
+            </form>
+
+            <p id="mensagem" role="status">
+                Verificando o link de recuperação...
+            </p>
+
+            <a href="admin.html">
+                Voltar ao login
+            </a>
+
+        </section>
+
+    </main>
+
+    <!-- Supabase -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+        defer>
+    </script>
+
+    <script src="js/supabase.js" defer></script>
+
+    <script>
+        document.addEventListener(
+            "DOMContentLoaded",
+            async () => {
+
+                const cliente = window.naRuaSupabase;
+
+                const formulario =
+                    document.getElementById(
+                        "form-redefinir"
+                    );
+
+                const mensagem =
+                    document.getElementById(
+                        "mensagem"
+                    );
+
+                const botao =
+                    document.getElementById(
+                        "salvar-senha"
+                    );
+
+                if (!cliente) {
+                    mensagem.textContent =
+                        "Erro ao conectar ao Supabase.";
+                    return;
+                }
+
+                // O Supabase processa o link
+                // de recuperação recebido por e-mail.
+
+                const { data, error } =
+                    await cliente.auth.getUser();
+
+                if (error || !data?.user) {
+                    mensagem.textContent =
+                        "Link inválido ou expirado. " +
+                        "Solicite uma nova recuperação.";
+                    return;
+                }
+
+                formulario.hidden = false;
+
+                mensagem.textContent =
+                    "Digite sua nova senha.";
+
+                formulario.addEventListener(
+                    "submit",
+                    async (evento) => {
+
+                        evento.preventDefault();
+
+                        const senha =
+                            document.getElementById(
+                                "nova-senha"
+                            ).value;
+
+                        const confirmacao =
+                            document.getElementById(
+                                "confirmar-senha"
+                            ).value;
+
+                        if (senha !== confirmacao) {
+                            mensagem.textContent =
+                                "As senhas não coincidem.";
+                            return;
+                        }
+
+                        botao.disabled = true;
+
+                        mensagem.textContent =
+                            "Atualizando senha...";
+
+                        try {
+
+                            const { error } =
+                                await cliente.auth.updateUser({
+                                    password: senha
+                                });
+
+                            if (error) {
+                                throw error;
+                            }
+
+                            mensagem.textContent =
+                                "Senha atualizada com sucesso! " +
+                                "Volte ao login administrativo.";
+
+                            formulario.hidden = true;
+
+                            await cliente.auth.signOut();
+
+                        } catch (erro) {
+
+                            mensagem.textContent =
+                                "Erro ao atualizar: " +
+                                erro.message;
+
+                        } finally {
+
+                            botao.disabled = false;
+
+                        }
+                    }
+                );
+            }
+        );
+    </script>
+
+</body>
+</html>

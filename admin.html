@@ -1,0 +1,533 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="robots" content="noindex, nofollow">
+
+    <meta name="theme-color" content="#1646A0">
+
+    <title>Administração | Na Rua</title>
+
+    <!-- ================================= -->
+    <!-- ESTILOS DO SITE                   -->
+    <!-- ================================= -->
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/responsivo.css">
+
+    <link rel="stylesheet" href="css/admin.css">
+
+</head>
+
+
+<body>
+
+    <!-- ================================= -->
+    <!-- CABEÇALHO                         -->
+    <!-- ================================= -->
+
+    <header class="cabecalho">
+
+        <div class="container cabecalho-conteudo">
+
+            <a href="index.html" class="logo">
+
+                <span class="logo-icone"
+                      aria-hidden="true">
+                    ✊
+                </span>
+
+                <span class="logo-texto">
+                    Na Rua
+                </span>
+
+            </a>
+
+
+            <a href="index.html"
+               class="botao botao-destaque">
+                Voltar ao site
+            </a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================================= -->
+    <!-- CONTEÚDO PRINCIPAL                -->
+    <!-- ================================= -->
+
+    <main class="admin-area">
+
+
+        <!-- ================================= -->
+        <!-- TELA DE CARREGAMENTO             -->
+        <!-- ================================= -->
+
+        <section
+            id="admin-carregamento"
+            class="admin-central"
+        >
+
+            <p>
+                Verificando acesso administrativo...
+            </p>
+
+        </section>
+
+
+
+        <!-- ================================= -->
+        <!-- TELA DE LOGIN                    -->
+        <!-- ================================= -->
+
+        <section
+            id="admin-login"
+            class="admin-central"
+            hidden
+        >
+
+            <div class="admin-card admin-login-card">
+
+                <span class="admin-etiqueta">
+                    ACESSO RESTRITO
+                </span>
+
+
+                <h1>
+                    Administração do Na Rua
+                </h1>
+
+
+                <p>
+                    Entre com sua conta administrativa
+                    cadastrada no Supabase.
+                </p>
+
+
+                <!-- FORMULÁRIO DE LOGIN -->
+
+                <form id="form-login">
+
+
+                    <!-- E-MAIL -->
+
+                    <div class="admin-campo">
+
+                        <label for="admin-email">
+                            E-mail
+                        </label>
+
+                        <input
+                            type="email"
+                            id="admin-email"
+                            autocomplete="username"
+                            maxlength="254"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- SENHA -->
+
+                    <div class="admin-campo">
+
+                        <label for="admin-senha">
+                            Senha
+                        </label>
+
+                        <input
+                            type="password"
+                            id="admin-senha"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- ENTRAR -->
+
+                    <button
+                        id="admin-entrar"
+                        class="botao botao-primario admin-botao"
+                        type="submit"
+                    >
+                        Entrar
+                    </button>
+
+                </form>
+
+
+
+                <!-- MENSAGENS DE AUTENTICAÇÃO -->
+
+                <p
+                    id="admin-login-mensagem"
+                    class="admin-mensagem"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+
+
+                <p class="admin-nota">
+                    Não existe cadastro público
+                    de administradores nesta página.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================================= -->
+        <!-- PAINEL ADMINISTRATIVO            -->
+        <!-- ================================= -->
+
+        <section
+            id="admin-painel"
+            class="admin-conteudo"
+            hidden
+        >
+
+
+            <!-- ============================= -->
+            <!-- CABEÇALHO DO PAINEL           -->
+            <!-- ============================= -->
+
+            <div class="admin-topo">
+
+                <div>
+
+                    <span class="admin-etiqueta">
+                        ÁREA ADMINISTRATIVA
+                    </span>
+
+
+                    <h1>
+                        Gerenciar solicitações
+                    </h1>
+
+
+                    <p>
+                        Consulte as manifestações
+                        encaminhadas para análise.
+                    </p>
+
+
+                    <p class="admin-usuario">
+                        Conta:
+                        <strong
+                            id="admin-usuario-email">
+                        </strong>
+                    </p>
+
+                </div>
+
+
+
+                <!-- SAIR DA CONTA -->
+
+                <button
+                    id="admin-sair"
+                    type="button"
+                    class="admin-botao-secundario"
+                >
+                    Sair da conta
+                </button>
+
+            </div>
+
+
+
+            <!-- ============================= -->
+            <!-- FILTROS E ATUALIZAÇÃO         -->
+            <!-- ============================= -->
+
+            <div class="admin-barra">
+
+
+                <!-- FILTRO DE STATUS -->
+
+                <div class="admin-campo">
+
+                    <label for="admin-filtro-status">
+                        Situação
+                    </label>
+
+
+                    <select id="admin-filtro-status">
+
+                        <option value="pendente">
+                            Pendentes
+                        </option>
+
+                        <option value="aprovado">
+                            Aprovadas
+                        </option>
+
+                        <option value="rejeitado">
+                            Rejeitadas
+                        </option>
+
+                        <option value="correcao_solicitada">
+                            Correção solicitada
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- ATUALIZAR LISTA -->
+
+                <button
+                    id="admin-atualizar"
+                    type="button"
+                    class="admin-botao-secundario"
+                >
+                    Atualizar lista
+                </button>
+
+            </div>
+
+
+
+            <!-- ============================= -->
+            <!-- MENSAGENS DO PAINEL           -->
+            <!-- ============================= -->
+
+            <p
+                id="admin-aviso"
+                class="admin-mensagem"
+                role="status"
+                aria-live="polite"
+            ></p>
+
+
+
+            <!-- ============================= -->
+            <!-- LISTA E DETALHES             -->
+            <!-- ============================= -->
+
+            <div class="admin-grade">
+
+
+                <!-- ========================= -->
+                <!-- LISTA DE SOLICITAÇÕES     -->
+                <!-- ========================= -->
+
+                <section class="admin-card">
+
+                    <h2>
+                        Solicitações
+
+                        <span id="admin-total">
+                            0
+                        </span>
+                    </h2>
+
+
+                    <div
+                        id="admin-lista"
+                        class="admin-lista"
+                        aria-live="polite"
+                    >
+
+                        <p>
+                            Carregando solicitações...
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- ========================= -->
+                <!-- DETALHES DA SOLICITAÇÃO   -->
+                <!-- ========================= -->
+
+                <section
+                    id="admin-detalhes"
+                    class="admin-card"
+                    hidden
+                >
+
+
+                    <!-- TÍTULO -->
+
+                    <h2 id="admin-detalhe-titulo">
+                        Detalhes da solicitação
+                    </h2>
+
+
+
+                    <!-- AVISO DE PRIVACIDADE -->
+
+                    <p class="admin-privacidade">
+
+                        🔒 Dados privados.
+
+                        Não compartilhe contatos
+                        sem autorização.
+
+                    </p>
+
+
+
+                    <!-- INFORMAÇÕES DO EVENTO -->
+
+                    <dl
+                        id="admin-detalhe-campos"
+                        class="admin-detalhes-lista"
+                    >
+                    </dl>
+
+
+
+                    <!-- ========================= -->
+                    <!-- AÇÕES ADMINISTRATIVAS     -->
+                    <!-- ========================= -->
+
+                    <!--
+                        Os botões serão exibidos
+                        pelo js/admin.js somente
+                        para solicitações pendentes.
+
+                        As permissões efetivas
+                        serão verificadas pelas
+                        funções SQL do Supabase.
+                    -->
+
+                    <div
+                        id="admin-acoes"
+                        class="admin-acoes"
+                        hidden
+                    >
+
+
+                        <!-- APROVAR -->
+
+                        <button
+                            type="button"
+                            id="admin-aprovar"
+                            class="admin-btn-aprovar"
+                            disabled
+                        >
+                            Aprovar e publicar
+                        </button>
+
+
+
+                        <!-- REJEITAR -->
+
+                        <button
+                            type="button"
+                            id="admin-rejeitar"
+                            class="admin-btn-rejeitar"
+                            disabled
+                        >
+                            Rejeitar solicitação
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- ========================= -->
+                    <!-- CONFIRMAÇÃO DAS AÇÕES     -->
+                    <!-- ========================= -->
+
+                    <p
+                        id="admin-acao-mensagem"
+                        class="admin-mensagem"
+                        role="status"
+                        aria-live="polite"
+                    ></p>
+
+
+
+                    <!-- AVISO SOBRE PUBLICAÇÃO -->
+
+                    <p class="admin-nota">
+
+                        A publicação de uma manifestação
+                        depende de aprovação administrativa.
+
+                        Os dados privados dos responsáveis
+                        não devem ser incluídos na agenda pública.
+
+                    </p>
+
+
+                </section>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ================================= -->
+    <!-- RODAPÉ                            -->
+    <!-- ================================= -->
+
+    <footer class="admin-rodape">
+
+        <p>
+            Na Rua © 2026 — Área administrativa
+        </p>
+
+    </footer>
+
+
+
+    <!-- ================================= -->
+    <!-- BIBLIOTECA SUPABASE               -->
+    <!-- ================================= -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+        defer>
+    </script>
+
+
+
+    <!-- CONEXÃO COM SUPABASE -->
+
+    <script
+        src="js/supabase.js"
+        defer>
+    </script>
+
+
+
+    <!-- ================================= -->
+    <!-- JAVASCRIPT ADMINISTRATIVO         -->
+    <!-- ================================= -->
+
+    <script
+        src="js/admin.js"
+        defer>
+    </script>
+
+</body>
+
+</html>
