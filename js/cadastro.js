@@ -9,7 +9,7 @@
 
     // Mantenha false até concluirmos
     // os testes de segurança e privacidade.
-    const HABILITAR_ENVIO = false;
+    const HABILITAR_ENVIO = true;
 
     const NOME_FUNCAO = "enviar-manifestacao";
 
