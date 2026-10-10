@@ -7,8 +7,9 @@
 (() => {
     "use strict";
 
-    // Mantenha false até concluirmos
-    // os testes de segurança e privacidade.
+    // Interface de envio habilitada.
+    // O servidor também precisa estar ativo.
+
     const HABILITAR_ENVIO = true;
 
     const NOME_FUNCAO = "enviar-manifestacao";
@@ -23,20 +24,28 @@
         document.getElementById("cad-status");
 
     if (!formulario || !botao || !status) {
+
         console.error(
             "Elementos do formulário não encontrados."
         );
+
         return;
     }
 
     let enviando = false;
 
+    const textoOriginal =
+        "Enviar para aprovação";
 
-    // ======================================
-    // 1. MENSAGENS AO VISITANTE
-    // ======================================
+    /* ======================================
+       1. MENSAGENS AO VISITANTE
+       ====================================== */
 
-    function mostrarMensagem(mensagem, erro = false) {
+    function mostrarMensagem(
+        mensagem,
+        erro = false
+    ) {
+
         status.textContent = mensagem;
 
         status.setAttribute(
@@ -50,12 +59,12 @@
         );
     }
 
-
-    // ======================================
-    // 2. LEITURA DOS CAMPOS
-    // ======================================
+    /* ======================================
+       2. LEITURA DOS CAMPOS
+       ====================================== */
 
     function campo(formData, nome) {
+
         const valor = formData.get(nome);
 
         return typeof valor === "string"
@@ -67,16 +76,19 @@
         return campo(formData, nome) || null;
     }
 
-
-    // ======================================
-    // 3. PREPARAÇÃO DOS DADOS
-    // ======================================
+    /* ======================================
+       3. PREPARAR OS DADOS
+       ====================================== */
 
     function prepararDados() {
+
         const valores = new FormData(formulario);
 
         return {
-            titulo: campo(valores, "titulo"),
+
+            titulo: campo(
+                valores, "titulo"
+            ),
 
             categoria: campo(
                 valores, "categoria"
@@ -86,17 +98,25 @@
                 valores, "descricao"
             ),
 
-            data: campo(valores, "data"),
+            data: campo(
+                valores, "data"
+            ),
 
             horario: campo(
                 valores, "horario"
             ),
 
-            estado: campo(valores, "estado"),
+            estado: campo(
+                valores, "estado"
+            ),
 
-            cidade: campo(valores, "cidade"),
+            cidade: campo(
+                valores, "cidade"
+            ),
 
-            local: campo(valores, "local"),
+            local: campo(
+                valores, "local"
+            ),
 
             referencia: opcional(
                 valores, "referencia"
@@ -111,25 +131,30 @@
             ),
 
             // Dados privados do responsável.
-            // Enviados somente à Edge Function.
 
             representante_nome: campo(
-                valores, "representante_nome"
+                valores,
+                "representante_nome"
             ),
 
             representante_email: campo(
-                valores, "representante_email"
+                valores,
+                "representante_email"
             ),
 
             representante_telefone: opcional(
-                valores, "representante_telefone"
+                valores,
+                "representante_telefone"
             ),
 
             representante_funcao: opcional(
-                valores, "representante_funcao"
+                valores,
+                "representante_funcao"
             ),
 
-            fonte: opcional(valores, "fonte"),
+            fonte: opcional(
+                valores, "fonte"
+            ),
 
             cartaz_url: opcional(
                 valores, "cartaz_url"
@@ -149,20 +174,27 @@
                     "declaracao_privacidade"
                 )?.checked === true,
 
-            // Token gerado pelo Cloudflare.
+            // Token Cloudflare Turnstile.
+
             turnstileToken:
                 window.turnstile?.getResponse?.() || ""
         };
     }
 
-
-    // ======================================
-    // 4. LER ERROS DA EDGE FUNCTION
-    // ======================================
+    /* ======================================
+       4. LER ERROS DO SUPABASE
+       ====================================== */
 
     async function mensagemDaFuncao(erro) {
+
         try {
-            if (erro?.context?.json) {
+
+            if (
+                erro?.context &&
+                typeof erro.context.json ===
+                    "function"
+            ) {
+
                 const resposta =
                     await erro.context.json();
 
@@ -171,22 +203,22 @@
                 ) {
                     return resposta.erro;
                 }
+
             }
-        } catch (_) {
-            // Retorna mensagem genérica
-            // caso a resposta não seja JSON.
+
+        } catch {
+            // Mantém mensagem genérica.
         }
 
         return (
-            "Não foi possível enviar. " +
-            "Verifique a conexão e tente novamente."
+            "Não foi possível enviar a solicitação. " +
+            "Verifique sua conexão e tente novamente."
         );
     }
 
-
-    // ======================================
-    // 5. ENVIO DO FORMULÁRIO
-    // ======================================
+    /* ======================================
+       5. ENVIAR O FORMULÁRIO
+       ====================================== */
 
     formulario.addEventListener(
         "submit",
@@ -194,14 +226,13 @@
 
             evento.preventDefault();
 
-            // Bloqueio temporário de testes.
-
             if (!HABILITAR_ENVIO) {
+
                 mostrarMensagem(
-                    "Cadastro em preparação. " +
-                    "O envio ainda está desativado.",
+                    "O cadastro está temporariamente desativado.",
                     true
                 );
+
                 return;
             }
 
@@ -212,52 +243,68 @@
                 return;
             }
 
-            // Cliente Supabase inicializado
-            // no arquivo js/supabase.js.
-
-            const cliente = window.naRuaSupabase;
+            const cliente =
+                window.naRuaSupabase;
 
             if (
                 !cliente ||
                 typeof cliente.functions?.invoke !==
                     "function"
             ) {
+
                 mostrarMensagem(
-                    "Não foi possível conectar ao " +
-                    "Supabase. Atualize a página.",
+                    "Não foi possível conectar ao Supabase. " +
+                    "Atualize a página.",
                     true
                 );
+
                 return;
             }
-
-            // Reúne os dados e o token.
 
             const dados = prepararDados();
 
-            if (!dados.turnstileToken) {
+            // Confirma declarações obrigatórias.
+
+            if (
+                !dados.declaracao_autorizacao ||
+                !dados.declaracao_privacidade
+            ) {
+
                 mostrarMensagem(
-                    "Conclua a verificação de " +
-                    "segurança antes de enviar.",
+                    "Aceite as declarações obrigatórias.",
                     true
                 );
+
                 return;
             }
 
+            // Confirma verificação de segurança.
+
+            if (!dados.turnstileToken) {
+
+                mostrarMensagem(
+                    "Conclua a verificação de segurança " +
+                    "antes de enviar.",
+                    true
+                );
+
+                return;
+            }
+
+            // Impede envios simultâneos.
+
             enviando = true;
+
             botao.disabled = true;
+
             botao.textContent =
                 "Enviando solicitação...";
 
             mostrarMensagem(
-                "Enviando sua solicitação " +
-                "para análise..."
+                "Enviando sua solicitação para análise..."
             );
 
             try {
-
-                // Envia para a Edge Function.
-                // Não envia diretamente à
-                // tabela privada solicitacoes.
 
                 const { data, error } =
                     await cliente.functions.invoke(
@@ -268,6 +315,7 @@
                     );
 
                 if (error) {
+
                     throw new Error(
                         await mensagemDaFuncao(error)
                     );
@@ -277,23 +325,27 @@
                     data?.ok !== true ||
                     !data?.protocolo
                 ) {
+
                     throw new Error(
                         "Resposta inesperada do servidor."
                     );
                 }
 
-                // Confirma o recebimento.
+                // Cadastro aceito.
+                // Ainda depende de aprovação.
 
                 mostrarMensagem(
-                    "Solicitação recebida para análise! " +
-                    "Protocolo: " + data.protocolo +
-                    ". A publicação depende de " +
-                    "aprovação administrativa."
+                    "Solicitação recebida com sucesso! " +
+                    "Protocolo: " +
+                    data.protocolo +
+                    ". A manifestação será analisada " +
+                    "antes de aparecer na agenda."
                 );
 
                 formulario.reset();
 
-                // Limpa o token utilizado.
+                // Token é de uso único.
+
                 window.turnstile?.reset?.();
 
             } catch (erro) {
@@ -301,37 +353,39 @@
                 mostrarMensagem(
                     erro instanceof Error
                         ? erro.message
-                        : "Falha ao enviar solicitação.",
+                        : "Falha ao enviar a solicitação.",
                     true
                 );
 
-                // Tokens são de uso único.
+                // Solicita novo token para
+                // uma eventual nova tentativa.
+
                 window.turnstile?.reset?.();
 
             } finally {
 
                 enviando = false;
 
-                botao.disabled = !HABILITAR_ENVIO;
+                botao.disabled =
+                    !HABILITAR_ENVIO;
 
                 botao.textContent =
                     HABILITAR_ENVIO
-                        ? "Enviar para aprovação"
+                        ? textoOriginal
                         : "Enviar para aprovação (em breve)";
             }
         }
     );
 
-
-    // ======================================
-    // 6. CONFIGURAÇÃO INICIAL
-    // ======================================
+    /* ======================================
+       6. CONFIGURAÇÃO INICIAL
+       ====================================== */
 
     botao.disabled = !HABILITAR_ENVIO;
 
     botao.textContent =
         HABILITAR_ENVIO
-            ? "Enviar para aprovação"
+            ? textoOriginal
             : "Enviar para aprovação (em breve)";
 
 })();
